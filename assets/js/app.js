@@ -1,4 +1,4 @@
-/* Danubia – gemeinsame Logik für alle Seiten */
+/* Terravia – gemeinsame Logik für alle Seiten */
 
 /* ---------- Konfiguration in die Seite übernehmen ---------- */
 
