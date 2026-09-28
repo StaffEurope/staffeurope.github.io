@@ -1,506 +1,204 @@
-/* Plata – Arbeitsvermittlung
- * Gemeinsame Logik für alle Seiten. Die Seite wird über <body data-page="..."> erkannt.
- */
+/* Plata – gemeinsame Logik für alle Seiten */
 
-const STORAGE_JOBS = "plata_jobs";
-const STORAGE_APPLICATIONS = "plata_applications";
-const STORAGE_MESSAGES = "plata_messages";
+/* ---------- Konfiguration in die Seite übernehmen ---------- */
 
-/* ---------- Hilfsfunktionen ---------- */
-
-function escapeHtml(value) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
+function applyConfig() {
+  const c = SITE_CONFIG;
+  document.querySelectorAll("[data-cfg='companyName']").forEach((el) => (el.textContent = c.companyName));
+  document.querySelectorAll("[data-cfg='email']").forEach((el) => {
+    el.textContent = c.email;
+    if (el.tagName === "A") el.href = `mailto:${c.email}`;
+  });
+  document.querySelectorAll("[data-cfg='phone']").forEach((el) => {
+    el.textContent = c.phone;
+    if (el.tagName === "A") el.href = `tel:${c.phone.replace(/[^\d+]/g, "")}`;
+  });
+  document.querySelectorAll("[data-cfg-href='phone']").forEach((el) => (el.href = `tel:${c.phone.replace(/[^\d+]/g, "")}`));
+  document.querySelectorAll("[data-cfg-href='email']").forEach((el) => (el.href = `mailto:${c.email}`));
+  document.querySelectorAll("[data-cfg-href='whatsapp']").forEach((el) => (el.href = `https://wa.me/${c.whatsapp}`));
+  document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 }
 
-function readStore(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key)) || [];
-  } catch {
-    return [];
-  }
-}
+/* ---------- Mobiles Menü ---------- */
 
-function writeStore(key, items) {
-  try {
-    localStorage.setItem(key, JSON.stringify(items));
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function getAllJobs() {
-  return [...readStore(STORAGE_JOBS), ...SAMPLE_JOBS].sort((a, b) =>
-    b.posted.localeCompare(a.posted)
-  );
-}
-
-function getJob(id) {
-  return getAllJobs().find((job) => job.id === id);
-}
-
-function categoryName(id) {
-  return CATEGORIES.find((c) => c.id === id)?.name ?? "Sonstiges";
-}
-
-function formatDate(iso) {
-  const date = new Date(iso + "T00:00:00");
-  return date.toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" });
-}
-
-function daysAgo(iso) {
-  const diff = Math.floor((Date.now() - new Date(iso + "T00:00:00")) / 86400000);
-  if (diff <= 0) return "Heute";
-  if (diff === 1) return "Gestern";
-  return `vor ${diff} Tagen`;
-}
-
-function isNew(iso) {
-  return (Date.now() - new Date(iso + "T00:00:00")) / 86400000 < 4;
-}
-
-const LOGO_COLORS = ["#1f5eff", "#12b886", "#f76707", "#7048e8", "#e64980", "#1098ad", "#f59f00", "#2b8a3e"];
-
-function companyLogo(company) {
-  const initials = company
-    .split(/\s+/)
-    .filter((w) => /^[A-Za-zÄÖÜäöü]/.test(w))
-    .slice(0, 2)
-    .map((w) => w[0].toUpperCase())
-    .join("");
-  let hash = 0;
-  for (const ch of company) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
-  const color = LOGO_COLORS[hash % LOGO_COLORS.length];
-  return `<div class="company-logo" style="background:${color}" aria-hidden="true">${escapeHtml(initials)}</div>`;
-}
-
-/* ---------- Layout (Header & Footer) ---------- */
-
-function renderLayout() {
-  const page = document.body.dataset.page;
-  const links = [
-    { href: "index.html", label: "Start", page: "home" },
-    { href: "jobs.html", label: "Stellenangebote", page: "jobs" },
-    { href: "arbeitgeber.html", label: "Für Arbeitgeber", page: "employer" },
-    { href: "kontakt.html", label: "Kontakt", page: "contact" },
-  ];
-
-  const header = document.createElement("header");
-  header.className = "site-header";
-  header.innerHTML = `
-    <div class="container">
-      <a href="index.html" class="logo"><span class="logo-mark">P</span>Plata</a>
-      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
-      <nav class="nav">
-        ${links
-          .map(
-            (l) =>
-              `<a href="${l.href}" class="${l.page === page ? "active" : ""}">${l.label}</a>`
-          )
-          .join("")}
-        <a href="arbeitgeber.html#formular" class="btn btn-primary btn-small" style="color:#fff">Stelle inserieren</a>
-      </nav>
-    </div>`;
-  document.body.prepend(header);
-
-  const toggle = header.querySelector(".nav-toggle");
-  const nav = header.querySelector(".nav");
+function initNav() {
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector(".nav");
+  if (!toggle || !nav) return;
   toggle.addEventListener("click", () => {
     const open = nav.classList.toggle("open");
     toggle.setAttribute("aria-expanded", String(open));
   });
-
-  const footer = document.createElement("footer");
-  footer.className = "site-footer";
-  footer.innerHTML = `
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="logo"><span class="logo-mark">P</span>Plata</div>
-          <p>Ihre persönliche Arbeitsvermittlung – wir bringen Menschen und Unternehmen zusammen. Kostenlos für Bewerber:innen.</p>
-        </div>
-        <div>
-          <h4>Bewerber:innen</h4>
-          <a href="jobs.html">Stellen suchen</a>
-          <a href="index.html#so-gehts">So funktioniert's</a>
-          <a href="kontakt.html">Beratung anfragen</a>
-        </div>
-        <div>
-          <h4>Arbeitgeber</h4>
-          <a href="arbeitgeber.html">Leistungen</a>
-          <a href="arbeitgeber.html#formular">Stelle inserieren</a>
-        </div>
-        <div>
-          <h4>Rechtliches</h4>
-          <a href="impressum.html">Impressum</a>
-          <a href="datenschutz.html">Datenschutz</a>
-        </div>
-      </div>
-      <div class="footer-bottom">© ${new Date().getFullYear()} Plata Arbeitsvermittlung</div>
-    </div>`;
-  document.body.append(footer);
+  nav.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      nav.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
 }
 
-/* ---------- Stellen-Karte ---------- */
+/* ---------- Formulare ---------- */
 
-function jobCard(job) {
-  return `
-    <a class="job-card" href="job.html?id=${encodeURIComponent(job.id)}">
-      ${companyLogo(job.company)}
-      <div>
-        <h3>${escapeHtml(job.title)}</h3>
-        <div class="company">${escapeHtml(job.company)} · ${escapeHtml(job.location)}</div>
-        <div class="job-meta">
-          ${isNew(job.posted) ? '<span class="tag tag-new">Neu</span>' : ""}
-          <span class="tag">${escapeHtml(job.type)}</span>
-          <span class="tag">${escapeHtml(categoryName(job.category))}</span>
-          ${job.remote ? '<span class="tag">Homeoffice möglich</span>' : ""}
-        </div>
-      </div>
-      <div class="job-side">
-        ${job.salary ? `<span class="salary">${escapeHtml(job.salary)}</span>` : ""}
-        ${daysAgo(job.posted)}
-      </div>
-    </a>`;
-}
-
-/* ---------- Formular-Validierung ---------- */
-
-function validateForm(form) {
-  let valid = true;
+function validate(form) {
+  let ok = true;
   form.querySelectorAll(".field").forEach((field) => {
     const input = field.querySelector("input, select, textarea");
     if (!input) return;
-    const ok = input.checkValidity();
-    field.classList.toggle("invalid", !ok);
-    if (!ok) valid = false;
+    const valid = input.checkValidity();
+    field.classList.toggle("invalid", !valid);
+    if (!valid) ok = false;
   });
-  const consent = form.querySelector('input[name="consent"]');
-  if (consent && !consent.checked) {
-    consent.closest(".consent").style.color = "var(--danger)";
-    valid = false;
-  } else if (consent) {
-    consent.closest(".consent").style.color = "";
+  const consent = form.querySelector("input[name='consent']");
+  if (consent) {
+    consent.closest(".consent").classList.toggle("invalid", !consent.checked);
+    if (!consent.checked) ok = false;
   }
-  if (!valid) {
-    form.querySelector(".invalid input, .invalid select, .invalid textarea")?.focus();
-  }
-  return valid;
+  if (!ok) form.querySelector(".invalid input, .invalid select, .invalid textarea, .consent.invalid input")?.focus();
+  return ok;
 }
 
-function formData(form) {
-  return Object.fromEntries(new FormData(form).entries());
-}
-
-function showSuccess(alertEl, html) {
-  alertEl.innerHTML = html;
-  alertEl.classList.add("show");
-  alertEl.scrollIntoView({ behavior: "smooth", block: "center" });
-}
-
-function fillCategorySelect(select, withAll) {
-  select.innerHTML =
-    (withAll ? '<option value="">Alle Branchen</option>' : '<option value="">Bitte wählen</option>') +
-    CATEGORIES.map((c) => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join("");
-}
-
-/* ---------- Seite: Start ---------- */
-
-function initHome() {
-  const jobs = getAllJobs();
-
-  document.getElementById("stat-jobs").textContent = jobs.length;
-  document.getElementById("stat-companies").textContent = new Set(jobs.map((j) => j.company)).size;
-
-  document.getElementById("latest-jobs").innerHTML = jobs.slice(0, 4).map(jobCard).join("");
-
-  document.getElementById("category-grid").innerHTML = CATEGORIES.map((c) => {
-    const count = jobs.filter((j) => j.category === c.id).length;
-    return `
-      <a class="category" href="jobs.html?kategorie=${c.id}">
-        <div class="icon">${c.icon}</div>
-        <strong>${escapeHtml(c.name)}</strong>
-        <span>${count} ${count === 1 ? "Stelle" : "Stellen"}</span>
-      </a>`;
-  }).join("");
-}
-
-/* ---------- Seite: Stellenangebote ---------- */
-
-function initJobs() {
-  const params = new URLSearchParams(location.search);
-  const form = document.getElementById("filter-form");
-  const q = form.elements.q;
-  const ort = form.elements.ort;
-  const kategorie = form.elements.kategorie;
-  const remote = form.elements.remote;
-  const sort = document.getElementById("sort");
-
-  fillCategorySelect(kategorie, true);
-
-  document.getElementById("type-filters").innerHTML = EMPLOYMENT_TYPES.map(
-    (t) => `<label class="check"><input type="checkbox" name="typ" value="${t}"> ${t}</label>`
-  ).join("");
-
-  q.value = params.get("q") || "";
-  ort.value = params.get("ort") || "";
-  kategorie.value = params.get("kategorie") || "";
-  const typeParam = params.get("typ");
-  if (typeParam) {
-    form.querySelectorAll('input[name="typ"]').forEach((cb) => (cb.checked = cb.value === typeParam));
-  }
-
-  const list = document.getElementById("job-list");
-  const count = document.getElementById("result-count");
-
-  function render() {
-    const term = q.value.trim().toLowerCase();
-    const place = ort.value.trim().toLowerCase();
-    const types = [...form.querySelectorAll('input[name="typ"]:checked')].map((cb) => cb.value);
-
-    let jobs = getAllJobs().filter((job) => {
-      const haystack = [job.title, job.company, job.description, ...(job.tasks || []), ...(job.requirements || [])]
-        .join(" ")
-        .toLowerCase();
-      if (term && !haystack.includes(term)) return false;
-      if (place && !job.location.toLowerCase().includes(place)) return false;
-      if (kategorie.value && job.category !== kategorie.value) return false;
-      if (types.length && !types.includes(job.type)) return false;
-      if (remote.checked && !job.remote) return false;
-      return true;
-    });
-
-    if (sort.value === "title") jobs.sort((a, b) => a.title.localeCompare(b.title, "de"));
-    if (sort.value === "location") jobs.sort((a, b) => a.location.localeCompare(b.location, "de"));
-
-    count.textContent = `${jobs.length} ${jobs.length === 1 ? "Stelle" : "Stellen"} gefunden`;
-    list.innerHTML = jobs.length
-      ? jobs.map(jobCard).join("")
-      : `<div class="empty"><strong>Keine passenden Stellen gefunden.</strong><br>Passen Sie Ihre Filter an oder <a href="kontakt.html">lassen Sie sich persönlich beraten</a>.</div>`;
-
-    const url = new URL(location.href);
-    url.search = "";
-    if (q.value.trim()) url.searchParams.set("q", q.value.trim());
-    if (ort.value.trim()) url.searchParams.set("ort", ort.value.trim());
-    if (kategorie.value) url.searchParams.set("kategorie", kategorie.value);
-    history.replaceState(null, "", url);
-  }
-
-  form.addEventListener("input", render);
-  form.addEventListener("change", render);
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    render();
+// Liefert die ausgefüllten Felder als "Beschriftung: Wert"-Zeilen (in der aktuell angezeigten Sprache).
+function summarize(form) {
+  const lines = [];
+  form.querySelectorAll(".field").forEach((field) => {
+    const input = field.querySelector("input, select, textarea");
+    const label = field.querySelector("label");
+    if (!input || !label || input.type === "checkbox") return;
+    let value = input.value.trim();
+    if (input.tagName === "SELECT") value = input.value ? input.selectedOptions[0].textContent.trim() : "";
+    if (value) lines.push(`${label.textContent.trim()}: ${value}`);
   });
-  form.addEventListener("reset", () => setTimeout(render));
-  sort.addEventListener("change", render);
-
-  render();
+  return lines.join("\n");
 }
 
-/* ---------- Seite: Stellendetail ---------- */
+function showStatus(form, type, text) {
+  const box = form.parentElement.querySelector(".form-status");
+  box.className = `form-status show ${type}`;
+  box.textContent = text;
+  box.scrollIntoView({ behavior: "smooth", block: "center" });
+}
 
-function initJobDetail() {
-  const id = new URLSearchParams(location.search).get("id");
-  const job = id && getJob(id);
-  const container = document.getElementById("job-detail");
+async function sendForm(form, { subject, messages }) {
+  const body = summarize(form);
 
-  if (!job) {
-    container.innerHTML = `
-      <div class="empty" style="margin:40px 0">
-        <strong>Diese Stelle wurde nicht gefunden.</strong><br>
-        Möglicherweise ist sie bereits besetzt. <a href="jobs.html">Zu allen Stellenangeboten</a>
-      </div>`;
+  if (SITE_CONFIG.formEndpoint) {
+    const data = new FormData(form);
+    data.append("_subject", subject);
+    try {
+      const res = await fetch(SITE_CONFIG.formEndpoint, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (!res.ok) throw new Error(res.statusText);
+      form.reset();
+      showStatus(form, "ok", messages.ok);
+    } catch {
+      showStatus(form, "err", messages.err);
+    }
     return;
   }
 
-  document.title = `${job.title} – ${job.company} | Plata`;
-
-  const list = (items) =>
-    items && items.length ? `<ul>${items.map((i) => `<li>${escapeHtml(i)}</li>`).join("")}</ul>` : "";
-
-  container.innerHTML = `
-    <div class="detail-layout">
-      <article class="card detail-body">
-        <a class="back-link" href="jobs.html">← Zurück zur Übersicht</a>
-        <div class="detail-head">
-          ${companyLogo(job.company)}
-          <div>
-            <h1>${escapeHtml(job.title)}</h1>
-            <div style="color:var(--muted)">${escapeHtml(job.company)} · ${escapeHtml(job.location)}</div>
-          </div>
-        </div>
-        <div class="job-meta">
-          <span class="tag">${escapeHtml(job.type)}</span>
-          <span class="tag">${escapeHtml(categoryName(job.category))}</span>
-          ${job.remote ? '<span class="tag">Homeoffice möglich</span>' : ""}
-        </div>
-        <h2>Über die Stelle</h2>
-        <p>${escapeHtml(job.description)}</p>
-        ${job.tasks?.length ? `<h2>Ihre Aufgaben</h2>${list(job.tasks)}` : ""}
-        ${job.requirements?.length ? `<h2>Ihr Profil</h2>${list(job.requirements)}` : ""}
-        ${job.benefits?.length ? `<h2>Wir bieten</h2>${list(job.benefits)}` : ""}
-      </article>
-
-      <aside>
-        <div class="card" style="margin-bottom:20px">
-          <ul class="facts">
-            <li><span>Arbeitsort</span><span>${escapeHtml(job.location)}</span></li>
-            <li><span>Anstellung</span><span>${escapeHtml(job.type)}</span></li>
-            <li><span>Gehalt</span><span>${escapeHtml(job.salary || "k. A.")}</span></li>
-            <li><span>Veröffentlicht</span><span>${formatDate(job.posted)}</span></li>
-          </ul>
-          <a href="#bewerbung" class="btn btn-primary btn-block">Jetzt bewerben</a>
-        </div>
-
-        <div class="card" id="bewerbung">
-          <h2 style="margin-top:0;font-size:1.2rem">Bewerbung senden</h2>
-          <div class="alert alert-success" id="apply-success" role="status"></div>
-          <form id="apply-form" novalidate>
-            <div class="field" style="margin-bottom:12px">
-              <label for="a-name">Vor- und Nachname *</label>
-              <input type="text" id="a-name" name="name" required autocomplete="name">
-              <div class="error-msg">Bitte geben Sie Ihren Namen an.</div>
-            </div>
-            <div class="field" style="margin-bottom:12px">
-              <label for="a-email">E-Mail *</label>
-              <input type="email" id="a-email" name="email" required autocomplete="email">
-              <div class="error-msg">Bitte geben Sie eine gültige E-Mail-Adresse an.</div>
-            </div>
-            <div class="field" style="margin-bottom:12px">
-              <label for="a-phone">Telefon</label>
-              <input type="tel" id="a-phone" name="phone" autocomplete="tel">
-            </div>
-            <div class="field" style="margin-bottom:12px">
-              <label for="a-message">Kurze Nachricht</label>
-              <textarea id="a-message" name="message" placeholder="Warum passen Sie zu dieser Stelle?"></textarea>
-            </div>
-            <div class="field" style="margin-bottom:14px">
-              <label for="a-cv">Lebenslauf <span class="hint">(PDF, optional)</span></label>
-              <input type="file" id="a-cv" name="cv" accept=".pdf,.doc,.docx">
-            </div>
-            <label class="consent" style="margin-bottom:16px">
-              <input type="checkbox" name="consent">
-              <span>Ich stimme der Verarbeitung meiner Daten zur Bearbeitung der Bewerbung gemäß der <a href="datenschutz.html">Datenschutzerklärung</a> zu. *</span>
-            </label>
-            <button type="submit" class="btn btn-primary btn-block">Bewerbung absenden</button>
-          </form>
-        </div>
-      </aside>
-    </div>`;
-
-  const form = document.getElementById("apply-form");
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (!validateForm(form)) return;
-    const data = formData(form);
-    const applications = readStore(STORAGE_APPLICATIONS);
-    applications.push({
-      jobId: job.id,
-      jobTitle: job.title,
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      message: data.message,
-      cv: data.cv && data.cv.name ? data.cv.name : "",
-      createdAt: new Date().toISOString(),
-    });
-    writeStore(STORAGE_APPLICATIONS, applications);
-    form.reset();
-    form.style.display = "none";
-    showSuccess(
-      document.getElementById("apply-success"),
-      `<strong>Vielen Dank, ${escapeHtml(data.name)}!</strong><br>Ihre Bewerbung für „${escapeHtml(
-        job.title
-      )}“ ist eingegangen. Unser Vermittlungsteam meldet sich innerhalb von 48 Stunden bei Ihnen.`
-    );
-  });
+  window.location.href =
+    `mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  showStatus(form, "ok", messages.mail);
 }
 
-/* ---------- Seite: Arbeitgeber ---------- */
+function sendWhatsApp(form, intro) {
+  const text = `${intro}\n\n${summarize(form)}`;
+  window.open(`https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+}
 
-function initEmployer() {
+function initEmployerForm() {
   const form = document.getElementById("employer-form");
-  fillCategorySelect(form.elements.category, false);
-  form.elements.type.innerHTML =
-    '<option value="">Bitte wählen</option>' +
-    EMPLOYMENT_TYPES.map((t) => `<option>${t}</option>`).join("");
-
-  const splitLines = (text) =>
-    (text || "")
-      .split("\n")
-      .map((l) => l.replace(/^[-•*]\s*/, "").trim())
-      .filter(Boolean);
-
+  if (!form) return;
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (!validateForm(form)) return;
-    const data = formData(form);
-    const job = {
-      id: "u" + Date.now().toString(36),
-      title: data.title.trim(),
-      company: data.company.trim(),
-      location: data.location.trim(),
-      category: data.category,
-      type: data.type,
-      remote: data.remote === "on",
-      salary: data.salary.trim(),
-      posted: new Date().toISOString().slice(0, 10),
-      description: data.description.trim(),
-      tasks: splitLines(data.tasks),
-      requirements: splitLines(data.requirements),
-      benefits: splitLines(data.benefits),
-      contact: { name: data.contactName, email: data.contactEmail, phone: data.contactPhone },
-    };
-    const jobs = readStore(STORAGE_JOBS);
-    jobs.push(job);
-    const saved = writeStore(STORAGE_JOBS, jobs);
-    form.reset();
-    showSuccess(
-      document.getElementById("employer-success"),
-      saved
-        ? `<strong>Ihre Stelle wurde veröffentlicht!</strong><br><a href="job.html?id=${encodeURIComponent(
-            job.id
-          )}">Anzeige „${escapeHtml(job.title)}“ ansehen</a> – unser Team meldet sich zusätzlich mit passenden Kandidat:innen.`
-        : `<strong>Vielen Dank!</strong> Ihre Anfrage ist eingegangen. Wir melden uns in Kürze bei Ihnen.`
-    );
+    if (!validate(form)) return;
+    const company = form.elements.company.value.trim();
+    sendForm(form, {
+      subject: `Personalanfrage – ${company}`,
+      messages: {
+        mail: "Ihr E-Mail-Programm wurde geöffnet. Bitte senden Sie die vorbereitete E-Mail dort ab.",
+        ok: "Vielen Dank für Ihre Anfrage! Wir melden uns zeitnah bei Ihnen.",
+        err: "Das Senden hat leider nicht geklappt. Bitte rufen Sie uns an oder schreiben Sie uns eine E-Mail.",
+      },
+    });
   });
 }
 
-/* ---------- Seite: Kontakt ---------- */
+/* ---------- Bewerberseite: Sprachen ---------- */
 
-function initContact() {
-  const form = document.getElementById("contact-form");
+let currentLang = "de";
+
+function t(key) {
+  return I18N[currentLang][key] ?? I18N.de[key] ?? key;
+}
+
+function detectLang() {
+  const param = new URLSearchParams(location.search).get("lang");
+  if (param && I18N[param]) return param;
+  try {
+    const saved = localStorage.getItem("plata_lang");
+    if (saved && I18N[saved]) return saved;
+  } catch {}
+  const browser = (navigator.language || "de").slice(0, 2).toLowerCase();
+  if (browser === "ro" || browser === "bg") return browser;
+  if (["sr", "hr", "bs", "sh", "cnr"].includes(browser)) return "sr";
+  return "de";
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.title = `${t("meta.title")} | ${SITE_CONFIG.companyName}`;
+  document.querySelectorAll("[data-i18n]").forEach((el) => (el.innerHTML = t(el.dataset.i18n)));
+  document.querySelectorAll("[data-i18n-ph]").forEach((el) => (el.placeholder = t(el.dataset.i18nPh)));
+  document.querySelectorAll(".lang-switch button").forEach((b) =>
+    b.setAttribute("aria-pressed", String(b.dataset.lang === lang))
+  );
+  try {
+    localStorage.setItem("plata_lang", lang);
+  } catch {}
+  const url = new URL(location.href);
+  url.searchParams.set("lang", lang);
+  history.replaceState(null, "", url);
+}
+
+function initWorkerPage() {
+  const form = document.getElementById("worker-form");
+  if (!form) return;
+
+  document.querySelectorAll(".lang-switch").forEach((sw) => {
+    sw.innerHTML = LANGUAGES.map(
+      (l) => `<button type="button" data-lang="${l.code}" title="${l.name}" aria-pressed="false">${l.label}</button>`
+    ).join("");
+    sw.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-lang]");
+      if (btn) setLang(btn.dataset.lang);
+    });
+  });
+  setLang(detectLang());
+
+  const messages = () => ({ mail: t("status.mail"), ok: t("status.ok"), err: t("status.err") });
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (!validateForm(form)) return;
-    const data = formData(form);
-    const messages = readStore(STORAGE_MESSAGES);
-    messages.push({ ...data, createdAt: new Date().toISOString() });
-    writeStore(STORAGE_MESSAGES, messages);
-    form.reset();
-    showSuccess(
-      document.getElementById("contact-success"),
-      `<strong>Danke für Ihre Nachricht!</strong><br>Wir melden uns so schnell wie möglich – in der Regel innerhalb eines Werktags.`
-    );
+    if (!validate(form)) return;
+    sendForm(form, { subject: `Bewerbung – ${form.elements.name.value.trim()}`, messages: messages() });
+  });
+
+  document.getElementById("worker-whatsapp").addEventListener("click", () => {
+    if (!validate(form)) return;
+    sendWhatsApp(form, t("form.title"));
   });
 }
 
 /* ---------- Start ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderLayout();
-  const pages = {
-    home: initHome,
-    jobs: initJobs,
-    job: initJobDetail,
-    employer: initEmployer,
-    contact: initContact,
-  };
-  pages[document.body.dataset.page]?.();
+  applyConfig();
+  initNav();
+  initEmployerForm();
+  initWorkerPage();
 });

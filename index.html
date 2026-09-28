@@ -3,128 +3,461 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plata – Arbeitsvermittlung | Finden Sie Ihren neuen Job</title>
-  <meta name="description" content="Plata ist Ihre persönliche Arbeitsvermittlung. Finden Sie passende Stellenangebote oder die richtigen Fachkräfte für Ihr Unternehmen.">
+  <title>Plata – Arbeitskräfte aus Südosteuropa für Unternehmen in Deutschland</title>
+  <meta name="description" content="Personalvermittlung für deutsche Unternehmen: zuverlässige Fach- und Arbeitskräfte aus Rumänien, Bulgarien, Kroatien und dem Westbalkan – ausgewählt über geprüfte Partneragenturen, direkt bei Ihnen angestellt.">
+  <meta name="theme-color" content="#050706">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-page="home">
-  <main>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo" aria-label="Startseite">
+        <span class="logo-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+        <span><span data-cfg="companyName">Plata</span><small>Personalvermittlung</small></span>
+      </a>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#ablauf">Ablauf</a>
+        <a href="#branchen">Branchen</a>
+        <a href="#ueber-uns">Über uns</a>
+        <a href="#faq">FAQ</a>
+        <a href="bewerber.html">Für Bewerber</a>
+        <a href="#kontakt" class="btn btn-green btn-small">Personal anfragen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= HERO ================= -->
     <section class="hero">
       <div class="container">
-        <h1>Ihr neuer Job ist näher, als Sie denken.</h1>
-        <p>Plata ist Ihre persönliche Arbeitsvermittlung. Wir bringen Bewerber:innen und Unternehmen zusammen – schnell, fair und für Jobsuchende komplett kostenlos.</p>
-        <form class="search-bar" action="jobs.html" method="get" role="search">
-          <input type="search" name="q" placeholder="Beruf, Stichwort oder Unternehmen" aria-label="Stichwort">
-          <input type="text" name="ort" placeholder="Ort" aria-label="Ort">
-          <button type="submit" class="btn btn-primary">Jobs finden</button>
-        </form>
-        <div class="hero-tags">
-          <span>Beliebt:</span>
-          <a href="jobs.html?q=Pflege">Pflege</a>
-          <a href="jobs.html?q=Entwickler">Entwickler</a>
-          <a href="jobs.html?kategorie=logistik">Logistik</a>
-          <a href="jobs.html?typ=Ausbildung">Ausbildung</a>
+        <div>
+          <span class="eyebrow">Personalvermittlung Südosteuropa → Deutschland</span>
+          <h1>Zuverlässige Arbeitskräfte aus Südosteuropa – <em>persönlich ausgewählt</em>, sicher vermittelt.</h1>
+          <p class="lead">Wir verbinden Unternehmen in Deutschland mit motivierten Fach- und Arbeitskräften aus Rumänien, Bulgarien, Kroatien und dem Westbalkan. Über geprüfte Partneragenturen vor Ort finden wir die passenden Leute – und begleiten sie bis zum ersten Arbeitstag und darüber hinaus.</p>
+          <div class="hero-actions">
+            <a href="#kontakt" class="btn btn-green">Personal anfragen</a>
+            <a href="#ablauf" class="btn btn-ghost">So arbeiten wir</a>
+          </div>
+          <p class="hero-langs">Sie suchen Arbeit?
+            <a href="bewerber.html?lang=ro">Română</a>
+            <a href="bewerber.html?lang=bg">Български</a>
+            <a href="bewerber.html?lang=sr">Srpski / Hrvatski / Bosanski</a>
+            <a href="bewerber.html?lang=de">Deutsch</a>
+          </p>
+        </div>
+
+        <div class="route-card" aria-hidden="true">
+          <h2>Unser Netzwerk</h2>
+          <svg viewBox="0 0 420 330" role="img">
+            <defs>
+              <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1" fill="#223029"/>
+              </pattern>
+            </defs>
+            <rect width="420" height="330" fill="url(#dots)"/>
+            <g fill="none" stroke="#4ade80" stroke-width="1.6" opacity="0.75">
+              <path class="route-path" d="M310 160 Q210 70 92 64"/>
+              <path class="route-path" d="M345 245 Q230 120 92 64"/>
+              <path class="route-path" d="M186 180 Q120 130 92 64"/>
+              <path class="route-path" d="M216 212 Q140 140 92 64"/>
+              <path class="route-path" d="M258 206 Q170 110 92 64"/>
+              <path class="route-path" d="M232 250 Q150 160 92 64"/>
+              <path class="route-path" d="M240 290 Q140 190 92 64"/>
+              <path class="route-path" d="M274 276 Q180 150 92 64"/>
+              <path class="route-path" d="M262 244 Q175 140 92 64"/>
+            </g>
+            <!-- Deutschland -->
+            <circle cx="92" cy="64" r="22" fill="rgba(47,191,113,0.18)"/>
+            <circle cx="92" cy="64" r="11" fill="#2fbf71"/>
+            <text x="92" y="104" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">Deutschland</text>
+            <!-- EU -->
+            <g fill="#4ade80">
+              <circle cx="310" cy="160" r="6"/><circle cx="345" cy="245" r="6"/><circle cx="186" cy="180" r="6"/>
+            </g>
+            <!-- Westbalkan -->
+            <g fill="#050706" stroke="#4ade80" stroke-width="2">
+              <circle cx="216" cy="212" r="5"/><circle cx="258" cy="206" r="5"/><circle cx="232" cy="250" r="5"/>
+              <circle cx="240" cy="290" r="5"/><circle cx="274" cy="276" r="5"/><circle cx="262" cy="244" r="5"/>
+            </g>
+            <g fill="#e8efea" font-size="11" font-weight="600">
+              <text x="322" y="156">Rumänien</text>
+              <text x="356" y="249">Bulgarien</text>
+              <text x="130" y="186">Kroatien</text>
+              <text x="160" y="220">Bosnien</text>
+              <text x="266" y="202">Serbien</text>
+              <text x="224" y="264" text-anchor="end">Montenegro</text>
+              <text x="190" y="306">Albanien</text>
+              <text x="284" y="286">Nordmazedonien</text>
+              <text x="272" y="248">Kosovo</text>
+            </g>
+          </svg>
+          <div class="legend"><span class="eu">EU – freier Arbeitsmarkt</span><span class="wb">Westbalkan – mit Visum</span></div>
         </div>
       </div>
     </section>
 
-    <div class="container">
-      <div class="stats">
-        <div class="stat"><strong id="stat-jobs">–</strong><span>offene Stellen</span></div>
-        <div class="stat"><strong id="stat-companies">–</strong><span>Partnerunternehmen</span></div>
-        <div class="stat"><strong>94 %</strong><span>Zufriedenheit</span></div>
-        <div class="stat"><strong>48 h</strong><span>Rückmeldung</span></div>
+    <!-- ================= TRUST ================= -->
+    <div class="trust">
+      <div class="container">
+        <div class="trust-item"><strong>Direkte Anstellung</strong><span>Fest bei Ihnen angestellt – keine Leiharbeit.</span></div>
+        <div class="trust-item"><strong>Geprüfte Partneragenturen</strong><span>Vorauswahl direkt in den Herkunftsländern.</span></div>
+        <div class="trust-item"><strong>Alles aus einer Hand</strong><span>Von der Auswahl bis zur Einarbeitung.</span></div>
+        <div class="trust-item"><strong>Fair &amp; transparent</strong><span>Kostenlos für Bewerber, klare Konditionen für Sie.</span></div>
       </div>
     </div>
 
-    <section class="section">
+    <!-- ================= LEISTUNGEN ================= -->
+    <section class="section section-light" id="leistungen">
       <div class="container">
-        <div class="section-title">
-          <h2>Aktuelle Stellenangebote</h2>
-          <p>Die neuesten Jobs unserer Partnerunternehmen</p>
-        </div>
-        <div class="job-list" id="latest-jobs"></div>
-        <p style="text-align:center;margin-top:28px">
-          <a href="jobs.html" class="btn btn-outline">Alle Stellenangebote ansehen</a>
-        </p>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="so-gehts">
-      <div class="container">
-        <div class="section-title">
-          <h2>So funktioniert's</h2>
-          <p>In drei Schritten zu Ihrem neuen Arbeitsplatz</p>
+        <div class="section-head">
+          <div class="kicker">Leistungen</div>
+          <h2>Wir kümmern uns um alles zwischen Bedarf und erstem Arbeitstag.</h2>
+          <p>Sie sagen uns, wen Sie brauchen. Wir finden die passenden Menschen, erledigen die Formalitäten und bleiben auch danach an Ihrer Seite.</p>
         </div>
         <div class="grid-3">
-          <div class="card">
-            <div class="step-num">1</div>
-            <h3>Stelle finden</h3>
-            <p>Durchsuchen Sie unsere Stellenangebote nach Beruf, Ort, Branche und Anstellungsart.</p>
-          </div>
-          <div class="card">
-            <div class="step-num">2</div>
-            <h3>Einfach bewerben</h3>
-            <p>Mit wenigen Klicks bewerben – ganz ohne Anschreiben. Ihr Lebenslauf genügt.</p>
-          </div>
-          <div class="card">
-            <div class="step-num">3</div>
-            <h3>Persönlich begleitet</h3>
-            <p>Unser Vermittlungsteam meldet sich, bereitet Sie auf Gespräche vor und begleitet Sie bis zum Vertrag.</p>
-          </div>
+          <article class="service">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></div>
+            <h3>Bedarfsanalyse</h3>
+            <p>Wir klären mit Ihnen Tätigkeit, Qualifikation, Sprachniveau, Arbeitszeiten und Vergütung – vor Ort oder telefonisch.</p>
+          </article>
+          <article class="service">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h3>Auswahl über Partneragenturen</h3>
+            <p>Unsere Partner in den Herkunftsländern suchen gezielt. Wir prüfen Erfahrung, Nachweise und Motivation selbst nach.</p>
+          </article>
+          <article class="service">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></div>
+            <h3>Vorstellungsgespräche</h3>
+            <p>Sie lernen die Kandidaten per Video oder persönlich kennen – bei Bedarf übersetzen wir.</p>
+          </article>
+          <article class="service">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 11h2"/></svg></div>
+            <h3>Papiere &amp; Behörden</h3>
+            <p>Visum, Zustimmung der Bundesagentur für Arbeit, Anerkennung, Anmeldung, Sozialversicherung – wir bereiten alles vor.</p>
+          </article>
+          <article class="service">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div>
+            <h3>Anreise &amp; Unterkunft</h3>
+            <p>Wir organisieren die Anreise und unterstützen bei der Suche nach Wohnraum in der Nähe Ihres Betriebs.</p>
+          </article>
+          <article class="service">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></div>
+            <h3>Betreuung nach dem Start</h3>
+            <p>Wir bleiben Ansprechpartner – für Sie und für die neuen Mitarbeitenden in ihrer Sprache. So bleiben die Leute.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <!-- ================= ABLAUF ================= -->
+    <section class="section section-black" id="ablauf">
       <div class="container">
-        <div class="section-title">
-          <h2>Jobs nach Branche</h2>
-          <p>Finden Sie Stellen in Ihrem Fachgebiet</p>
+        <div class="section-head">
+          <div class="kicker">Ablauf</div>
+          <h2>In fünf Schritten zu Ihrem neuen Personal.</h2>
+          <p>Klar strukturiert, mit festen Ansprechpartnern und ehrlichen Zeitangaben.</p>
         </div>
-        <div class="categories" id="category-grid"></div>
-      </div>
-    </section>
-
-    <section class="section section-alt">
-      <div class="container grid-2 audience">
-        <div class="card">
-          <h3>👤 Für Bewerber:innen</h3>
-          <ul>
-            <li>Kostenlose und unverbindliche Vermittlung</li>
-            <li>Persönliche Ansprechpartner:innen</li>
-            <li>Unterstützung bei Lebenslauf &amp; Vorstellungsgespräch</li>
-            <li>Zugang zu Stellen, die nicht öffentlich ausgeschrieben sind</li>
-          </ul>
-          <a href="jobs.html" class="btn btn-primary">Stellen durchsuchen</a>
-        </div>
-        <div class="card">
-          <h3>🏢 Für Arbeitgeber</h3>
-          <ul>
-            <li>Vorqualifizierte Kandidat:innen aus unserem Netzwerk</li>
-            <li>Stellenanzeigen in wenigen Minuten veröffentlichen</li>
-            <li>Erfolgsbasierte Vergütung – keine Vermittlung, keine Kosten</li>
-            <li>Feste Ansprechpartner:innen für Ihr Unternehmen</li>
-          </ul>
-          <a href="arbeitgeber.html" class="btn btn-outline">Mehr erfahren</a>
+        <div class="steps">
+          <div class="step"><h3>Anfrage</h3><p>Sie schildern uns Ihren Bedarf – per Formular, Telefon oder E-Mail.</p></div>
+          <div class="step"><h3>Suche &amp; Vorauswahl</h3><p>Unsere Partneragenturen suchen vor Ort, wir prüfen und wählen vor.</p></div>
+          <div class="step"><h3>Kennenlernen</h3><p>Sie sprechen mit den Kandidaten und entscheiden, wen Sie einstellen.</p></div>
+          <div class="step"><h3>Formalitäten</h3><p>Vertrag, Visum und Behördengänge – wir bereiten alles vor und halten Sie auf dem Laufenden.</p></div>
+          <div class="step"><h3>Start &amp; Betreuung</h3><p>Anreise, Einarbeitung und Begleitung auch nach dem ersten Arbeitstag.</p></div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <!-- ================= BRANCHEN ================= -->
+    <section class="section" id="branchen">
       <div class="container">
-        <div class="cta">
-          <div>
-            <h2>Nicht das Passende dabei?</h2>
-            <p>Hinterlassen Sie uns Ihre Kontaktdaten – wir melden uns, sobald eine passende Stelle frei wird.</p>
+        <div class="section-head">
+          <div class="kicker">Branchen</div>
+          <h2>Personal für Bereiche, in denen Hände fehlen.</h2>
+          <p>Von Helfern bis zu ausgebildeten Fachkräften – wir vermitteln dort, wo der Bedarf in Deutschland am größten ist.</p>
+        </div>
+        <div class="sectors">
+          <div class="sector">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h20"/><path d="M4 18v-3a8 8 0 0 1 16 0v3"/><path d="M10 7V5h4v2"/></svg></div>
+            <h3>Bau &amp; Handwerk</h3><p>Maurer, Trockenbauer, Elektriker, Helfer</p>
           </div>
-          <a href="kontakt.html" class="btn btn-light">Beratung anfragen</a>
+          <div class="sector">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></div>
+            <h3>Logistik &amp; Lager</h3><p>Lagerhelfer, Kommissionierer, Staplerfahrer</p>
+          </div>
+          <div class="sector">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21h20"/><path d="M4 21V10l5 3v-3l5 3V6h6v15"/></svg></div>
+            <h3>Produktion &amp; Industrie</h3><p>Produktionshelfer, Maschinenbediener, Schweißer</p>
+          </div>
+          <div class="sector">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1"/><path d="M14 9h4l4 4v4a1 1 0 0 1-1 1h-1"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M9 18h6"/></svg></div>
+            <h3>Transport</h3><p>Berufskraftfahrer (C/CE), Auslieferungsfahrer</p>
+          </div>
+          <div class="sector">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
+            <h3>Pflege &amp; Betreuung</h3><p>Pflegehilfskräfte, Pflegefachkräfte mit Anerkennung</p>
+          </div>
+          <div class="sector">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></div>
+            <h3>Gastronomie &amp; Hotel</h3><p>Köche, Küchenhilfen, Housekeeping, Service</p>
+          </div>
+          <div class="sector">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12c0-4 3-7 8-7 0 5-3 7-8 7Z"/><path d="M12 14c0-3-2-5-7-5 0 4 2 5 7 5Z"/></svg></div>
+            <h3>Landwirtschaft</h3><p>Erntehelfer, Saisonkräfte, Tierpflege</p>
+          </div>
+          <div class="sector">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 17v4"/><path d="M17 19h4"/></svg></div>
+            <h3>Reinigung &amp; Facility</h3><p>Gebäudereinigung, Hausmeisterdienste</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LÄNDER ================= -->
+    <section class="section section-black" id="laender">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Herkunftsländer</div>
+          <h2>Zwei Wege nach Deutschland – wir kennen beide.</h2>
+          <p>Je nach Herkunftsland gelten unterschiedliche Regeln. Wir sagen Ihnen vorab, was nötig ist und wie lange es dauert.</p>
+        </div>
+        <div class="countries">
+          <div class="country-group">
+            <h3>EU-Staaten – ohne Arbeitserlaubnis</h3>
+            <p>Bürgerinnen und Bürger dieser Länder haben volle Arbeitnehmerfreizügigkeit. Ein Start ist oft schon nach wenigen Wochen möglich.</p>
+            <ul class="country-list">
+              <li><span class="cc">RO</span>Rumänien</li>
+              <li><span class="cc">BG</span>Bulgarien</li>
+              <li><span class="cc">HR</span>Kroatien</li>
+            </ul>
+          </div>
+          <div class="country-group wb">
+            <h3>Westbalkan – mit Visum</h3>
+            <p>Über die Westbalkanregelung oder als anerkannte Fachkraft. Nötig sind ein konkretes Arbeitsplatzangebot, die Zustimmung der Bundesagentur für Arbeit und ein Visum. Die Bearbeitung dauert oft mehrere Monate – wir planen das realistisch mit Ihnen ein.</p>
+            <ul class="country-list">
+              <li><span class="cc">RS</span>Serbien</li>
+              <li><span class="cc">BA</span>Bosnien und Herzegowina</li>
+              <li><span class="cc">MK</span>Nordmazedonien</li>
+              <li><span class="cc">AL</span>Albanien</li>
+              <li><span class="cc">ME</span>Montenegro</li>
+              <li><span class="cc">XK</span>Kosovo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ÜBER UNS ================= -->
+    <section class="section section-white" id="ueber-uns">
+      <div class="container grid-2">
+        <div>
+          <div class="kicker">Über uns</div>
+          <h2 style="font-size:clamp(1.7rem,3.2vw,2.4rem);margin:0 0 16px">Wir kennen beide Seiten.</h2>
+          <p style="color:var(--muted-dark);font-size:1.07rem;margin:0">
+            <span data-cfg="companyName">Plata</span> ist aus der Praxis entstanden. Wir haben bereits mehrere Unternehmen in Deutschland erfolgreich mit Arbeitskräften aus Südosteuropa versorgt – und wissen, worauf es ankommt: die richtigen Leute, saubere Papiere und eine Begleitung, die nicht mit der Vertragsunterschrift endet.
+          </p>
+          <ul class="about-points">
+            <li><span class="check">✓</span><span>Erfahrung aus erfolgreichen Vermittlungen in verschiedenen Branchen</span></li>
+            <li><span class="check">✓</span><span>Verlässliches Netzwerk aus Partneragenturen in Südosteuropa</span></li>
+            <li><span class="check">✓</span><span>Verständnis für Sprache, Kultur und Erwartungen der Bewerber</span></li>
+            <li><span class="check">✓</span><span>Ein fester Ansprechpartner für Ihr Unternehmen</span></li>
+          </ul>
+        </div>
+        <div class="about-panel">
+          <blockquote>„Gute Vermittlung heißt für uns: Die Mitarbeitenden bleiben – weil es für beide Seiten passt.“</blockquote>
+          <div class="sig">— Ihr <span data-cfg="companyName">Plata</span>-Team</div>
+          <div class="facts">
+            <div><span>Herkunftsländer</span><span>9</span></div>
+            <div><span>Vertragsform</span><span>Direktanstellung bei Ihnen</span></div>
+            <div><span>Kosten für Bewerber</span><span>0 €</span></div>
+            <div><span>Referenzen</span><span>gern auf Anfrage</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head center">
+          <div class="kicker">FAQ</div>
+          <h2>Häufige Fragen von Arbeitgebern</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Werden die Arbeitskräfte bei uns angestellt?</summary>
+            <p>Ja. Wir sind Personalvermittler, keine Zeitarbeitsfirma. Die Mitarbeitenden erhalten einen regulären Arbeitsvertrag direkt bei Ihrem Unternehmen – zu denselben Bedingungen wie Ihre übrigen Beschäftigten.</p>
+          </details>
+          <details>
+            <summary>Wie schnell kann jemand anfangen?</summary>
+            <p>Bei Bewerbern aus EU-Staaten wie Rumänien, Bulgarien oder Kroatien ist ein Start oft innerhalb weniger Wochen möglich. Bei Bewerbern aus dem Westbalkan hängt die Dauer vor allem von der Visumsbearbeitung der deutschen Auslandsvertretungen ab und kann mehrere Monate betragen. Wir sagen Ihnen vorab ehrlich, womit Sie rechnen können.</p>
+          </details>
+          <details>
+            <summary>Was kostet die Vermittlung?</summary>
+            <p>Sie zahlen ein erfolgsabhängiges Vermittlungshonorar – erst, wenn eine Person bei Ihnen eingestellt wird. Die Höhe richtet sich nach Qualifikation und Anzahl der Stellen; Sie erhalten vorab ein schriftliches Angebot. Für Bewerberinnen und Bewerber ist unsere Vermittlung immer kostenlos.</p>
+          </details>
+          <details>
+            <summary>Wie gut sprechen die Bewerber Deutsch?</summary>
+            <p>Das ist unterschiedlich und hängt von Beruf und Herkunft ab. Wir geben das Sprachniveau offen an, führen Gespräche bei Bedarf mit Übersetzung und vermitteln auf Wunsch Sprachkurse.</p>
+          </details>
+          <details>
+            <summary>Wie wählen Sie die Kandidaten aus?</summary>
+            <p>Über unser Netzwerk aus Partneragenturen in den Herkunftsländern. Wir prüfen Erfahrung, Nachweise und Motivation, führen selbst Gespräche und stellen Ihnen nur Kandidaten vor, die zu Ihrem Anforderungsprofil passen.</p>
+          </details>
+          <details>
+            <summary>Was passiert nach dem Arbeitsbeginn?</summary>
+            <p>Wir bleiben Ansprechpartner – für Sie und für die neuen Mitarbeitenden. So lassen sich Fragen und kleine Probleme früh klären, bevor daraus Kündigungen werden.</p>
+          </details>
+          <details>
+            <summary>Helfen Sie bei der Unterkunft?</summary>
+            <p>Ja. Wir unterstützen bei der Suche nach geeignetem Wohnraum in der Nähe Ihres Betriebs. Stellen Sie selbst Unterkünfte zur Verfügung, stimmen wir alles direkt mit Ihnen ab.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= KONTAKT ================= -->
+    <section class="section section-black" id="kontakt">
+      <div class="container contact-wrap">
+        <div class="contact-info">
+          <div class="kicker">Kontakt</div>
+          <h2>Sie suchen Personal? Sprechen wir darüber.</h2>
+          <p>Schildern Sie uns kurz Ihren Bedarf. Wir melden uns persönlich, besprechen die Details und machen Ihnen ein unverbindliches Angebot.</p>
+          <div class="contact-lines">
+            <a class="contact-line" data-cfg-href="phone" href="#">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+              <span><small>Telefon</small><span data-cfg="phone"></span></span>
+            </a>
+            <a class="contact-line" data-cfg-href="email" href="#">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+              <span><small>E-Mail</small><span data-cfg="email"></span></span>
+            </a>
+            <a class="contact-line" data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+              <span><small>WhatsApp</small>Nachricht schreiben</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Personalanfrage</h3>
+          <p class="sub">Unverbindlich und kostenlos. Felder mit * sind Pflichtfelder.</p>
+          <div class="form-status" role="status" aria-live="polite"></div>
+          <form id="employer-form" novalidate>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="e-company">Unternehmen *</label>
+                <input id="e-company" name="company" type="text" required autocomplete="organization">
+                <div class="error-msg">Bitte geben Sie Ihr Unternehmen an.</div>
+              </div>
+              <div class="field">
+                <label for="e-name">Ansprechpartner *</label>
+                <input id="e-name" name="name" type="text" required autocomplete="name">
+                <div class="error-msg">Bitte geben Sie Ihren Namen an.</div>
+              </div>
+              <div class="field">
+                <label for="e-phone">Telefon</label>
+                <input id="e-phone" name="phone" type="tel" autocomplete="tel">
+              </div>
+              <div class="field full">
+                <label for="e-email">E-Mail *</label>
+                <input id="e-email" name="email" type="email" required autocomplete="email">
+                <div class="error-msg">Bitte geben Sie eine gültige E-Mail-Adresse an.</div>
+              </div>
+              <div class="field">
+                <label for="e-sector">Branche</label>
+                <select id="e-sector" name="sector">
+                  <option value="">Bitte wählen</option>
+                  <option>Bau &amp; Handwerk</option>
+                  <option>Logistik &amp; Lager</option>
+                  <option>Produktion &amp; Industrie</option>
+                  <option>Transport</option>
+                  <option>Pflege &amp; Betreuung</option>
+                  <option>Gastronomie &amp; Hotel</option>
+                  <option>Landwirtschaft</option>
+                  <option>Reinigung &amp; Facility</option>
+                  <option>Sonstiges</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="e-count">Anzahl Mitarbeitende</label>
+                <select id="e-count" name="count">
+                  <option value="">Bitte wählen</option>
+                  <option>1</option>
+                  <option>2–5</option>
+                  <option>6–10</option>
+                  <option>mehr als 10</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="e-start">Gewünschter Start</label>
+                <select id="e-start" name="start">
+                  <option value="">Bitte wählen</option>
+                  <option>so schnell wie möglich</option>
+                  <option>in 1–3 Monaten</option>
+                  <option>in mehr als 3 Monaten</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="e-message">Ihr Bedarf</label>
+                <textarea id="e-message" name="message" placeholder="Tätigkeit, Anforderungen, Standort, Arbeitszeiten …"></textarea>
+              </div>
+              <label class="consent full">
+                <input type="checkbox" name="consent">
+                <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Mehr in der <a href="datenschutz.html">Datenschutzerklärung</a>. *</span>
+              </label>
+              <div class="full">
+                <button type="submit" class="btn btn-green btn-block">Anfrage senden</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </section>
   </main>
 
-  <script src="assets/js/data.js"></script>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo">
+            <span class="logo-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+            <span data-cfg="companyName">Plata</span>
+          </a>
+          <p>Personalvermittlung für Unternehmen in Deutschland – mit Arbeitskräften aus Südosteuropa.</p>
+        </div>
+        <div>
+          <h4>Arbeitgeber</h4>
+          <a href="#leistungen">Leistungen</a>
+          <a href="#ablauf">Ablauf</a>
+          <a href="#faq">FAQ</a>
+          <a href="#kontakt">Personal anfragen</a>
+        </div>
+        <div>
+          <h4>Bewerber</h4>
+          <a href="bewerber.html?lang=ro">Română</a>
+          <a href="bewerber.html?lang=bg">Български</a>
+          <a href="bewerber.html?lang=sr">Srpski / Hrvatski / Bosanski</a>
+          <a href="bewerber.html?lang=de">Deutsch</a>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year></span> <span data-cfg="companyName">Plata</span></span>
+        <span>Personalvermittlung · keine Arbeitnehmerüberlassung</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

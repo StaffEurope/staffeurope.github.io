@@ -1,36 +1,38 @@
-# Plata – Arbeitsvermittlung
+# Plata – Personalvermittlung Südosteuropa → Deutschland
 
-Statische Website für eine Arbeitsvermittlung (HTML, CSS, JavaScript – ohne Build-Schritt).
+Website für die Vermittlung von Arbeitskräften aus Rumänien, Bulgarien, Kroatien und dem
+Westbalkan an Unternehmen in Deutschland. Reines HTML/CSS/JavaScript – kein Build-Schritt,
+keine Cookies, keine externen Schriften oder Tracker.
 
 ## Seiten
 
-| Datei | Inhalt |
-| --- | --- |
-| `index.html` | Startseite mit Jobsuche, aktuellen Stellen, Branchen und Ablauf |
-| `jobs.html` | Stellenübersicht mit Filtern (Stichwort, Ort, Branche, Anstellungsart, Homeoffice) und Sortierung |
-| `job.html?id=…` | Stellendetails mit Bewerbungsformular |
-| `arbeitgeber.html` | Leistungen für Arbeitgeber und Formular zum Inserieren einer Stelle |
-| `kontakt.html` | Kontakt- und Beratungsformular |
-| `impressum.html`, `datenschutz.html` | Rechtliche Seiten (Platzhalter – vor Veröffentlichung ersetzen!) |
+| Datei | Zielgruppe | Inhalt |
+| --- | --- | --- |
+| `index.html` | Deutsche Arbeitgeber | Leistungen, Ablauf, Branchen, Herkunftsländer, Über uns, FAQ, Anfrageformular |
+| `bewerber.html` | Arbeitskräfte | Vorteile, Ablauf, Bewerbungsformular + WhatsApp – umschaltbar: Deutsch, Rumänisch, Bulgarisch, Serbisch/Kroatisch/Bosnisch |
+| `impressum.html`, `datenschutz.html` | – | **Platzhalter – vor Veröffentlichung ausfüllen und prüfen lassen** |
 
-## Starten
+Direkte Links für Bewerber in ihrer Sprache: `bewerber.html?lang=ro`, `?lang=bg`, `?lang=sr`, `?lang=de`.
 
-Einfach `index.html` im Browser öffnen oder einen lokalen Server starten:
+## Vor dem Online-Stellen anpassen
+
+1. **`assets/js/config.js`** – Firmenname, E-Mail, Telefon, WhatsApp-Nummer eintragen.
+2. **Formulare:** Ohne weitere Einstellung öffnen die Formulare das E-Mail-Programm mit einer
+   vorausgefüllten Nachricht. Für echten Versand im Hintergrund bei einem Formular-Dienst
+   (z. B. Formspree) ein Konto anlegen und die Adresse bei `formEndpoint` eintragen.
+3. **Impressum und Datenschutz** mit den echten Firmendaten ausfüllen.
+
+## Lokal ansehen
+
+`index.html` im Browser öffnen oder:
 
 ```bash
-python3 -m http.server 8000
-# dann http://localhost:8000 öffnen
+python3 -m http.server 8000   # dann http://localhost:8000
 ```
 
 ## Aufbau
 
-- `assets/css/style.css` – Gestaltung (responsiv, mobiles Menü)
-- `assets/js/data.js` – Branchen, Anstellungsarten und Beispiel-Stellen (fiktive Firmen)
-- `assets/js/app.js` – Header/Footer, Suche & Filter, Formulare
-
-## Hinweis zu den Daten
-
-Es gibt noch kein Backend: Neu inserierte Stellen, Bewerbungen und Kontaktanfragen werden nur
-im `localStorage` des jeweiligen Browsers gespeichert (Schlüssel `plata_jobs`,
-`plata_applications`, `plata_messages`). Für den echten Betrieb müssen die Formulare an einen
-Server bzw. E-Mail-Dienst angebunden werden.
+- `assets/css/style.css` – Design (Grün/Weiß/Dunkel, responsiv)
+- `assets/js/config.js` – Ihre Kontaktdaten
+- `assets/js/i18n.js` – Übersetzungen der Bewerberseite
+- `assets/js/app.js` – Menü, Formulare, Sprachumschaltung
