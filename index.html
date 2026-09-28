@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plata – Arbeitsvermittlung | Finden Sie Ihren neuen Job</title>
+  <meta name="description" content="Plata ist Ihre persönliche Arbeitsvermittlung. Finden Sie passende Stellenangebote oder die richtigen Fachkräfte für Ihr Unternehmen.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="home">
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Ihr neuer Job ist näher, als Sie denken.</h1>
+        <p>Plata ist Ihre persönliche Arbeitsvermittlung. Wir bringen Bewerber:innen und Unternehmen zusammen – schnell, fair und für Jobsuchende komplett kostenlos.</p>
+        <form class="search-bar" action="jobs.html" method="get" role="search">
+          <input type="search" name="q" placeholder="Beruf, Stichwort oder Unternehmen" aria-label="Stichwort">
+          <input type="text" name="ort" placeholder="Ort" aria-label="Ort">
+          <button type="submit" class="btn btn-primary">Jobs finden</button>
+        </form>
+        <div class="hero-tags">
+          <span>Beliebt:</span>
+          <a href="jobs.html?q=Pflege">Pflege</a>
+          <a href="jobs.html?q=Entwickler">Entwickler</a>
+          <a href="jobs.html?kategorie=logistik">Logistik</a>
+          <a href="jobs.html?typ=Ausbildung">Ausbildung</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="stats">
+        <div class="stat"><strong id="stat-jobs">–</strong><span>offene Stellen</span></div>
+        <div class="stat"><strong id="stat-companies">–</strong><span>Partnerunternehmen</span></div>
+        <div class="stat"><strong>94 %</strong><span>Zufriedenheit</span></div>
+        <div class="stat"><strong>48 h</strong><span>Rückmeldung</span></div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Aktuelle Stellenangebote</h2>
+          <p>Die neuesten Jobs unserer Partnerunternehmen</p>
+        </div>
+        <div class="job-list" id="latest-jobs"></div>
+        <p style="text-align:center;margin-top:28px">
+          <a href="jobs.html" class="btn btn-outline">Alle Stellenangebote ansehen</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="so-gehts">
+      <div class="container">
+        <div class="section-title">
+          <h2>So funktioniert's</h2>
+          <p>In drei Schritten zu Ihrem neuen Arbeitsplatz</p>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <div class="step-num">1</div>
+            <h3>Stelle finden</h3>
+            <p>Durchsuchen Sie unsere Stellenangebote nach Beruf, Ort, Branche und Anstellungsart.</p>
+          </div>
+          <div class="card">
+            <div class="step-num">2</div>
+            <h3>Einfach bewerben</h3>
+            <p>Mit wenigen Klicks bewerben – ganz ohne Anschreiben. Ihr Lebenslauf genügt.</p>
+          </div>
+          <div class="card">
+            <div class="step-num">3</div>
+            <h3>Persönlich begleitet</h3>
+            <p>Unser Vermittlungsteam meldet sich, bereitet Sie auf Gespräche vor und begleitet Sie bis zum Vertrag.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Jobs nach Branche</h2>
+          <p>Finden Sie Stellen in Ihrem Fachgebiet</p>
+        </div>
+        <div class="categories" id="category-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container grid-2 audience">
+        <div class="card">
+          <h3>👤 Für Bewerber:innen</h3>
+          <ul>
+            <li>Kostenlose und unverbindliche Vermittlung</li>
+            <li>Persönliche Ansprechpartner:innen</li>
+            <li>Unterstützung bei Lebenslauf &amp; Vorstellungsgespräch</li>
+            <li>Zugang zu Stellen, die nicht öffentlich ausgeschrieben sind</li>
+          </ul>
+          <a href="jobs.html" class="btn btn-primary">Stellen durchsuchen</a>
+        </div>
+        <div class="card">
+          <h3>🏢 Für Arbeitgeber</h3>
+          <ul>
+            <li>Vorqualifizierte Kandidat:innen aus unserem Netzwerk</li>
+            <li>Stellenanzeigen in wenigen Minuten veröffentlichen</li>
+            <li>Erfolgsbasierte Vergütung – keine Vermittlung, keine Kosten</li>
+            <li>Feste Ansprechpartner:innen für Ihr Unternehmen</li>
+          </ul>
+          <a href="arbeitgeber.html" class="btn btn-outline">Mehr erfahren</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>Nicht das Passende dabei?</h2>
+            <p>Hinterlassen Sie uns Ihre Kontaktdaten – wir melden uns, sobald eine passende Stelle frei wird.</p>
+          </div>
+          <a href="kontakt.html" class="btn btn-light">Beratung anfragen</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

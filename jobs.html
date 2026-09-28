@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stellenangebote | Plata Arbeitsvermittlung</title>
+  <meta name="description" content="Aktuelle Stellenangebote in ganz Deutschland – Vollzeit, Teilzeit, Minijob, Ausbildung und Praktikum.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="jobs">
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Stellenangebote</h1>
+        <p>Finden Sie die Stelle, die zu Ihnen passt.</p>
+      </div>
+    </section>
+
+    <div class="container jobs-layout">
+      <form class="filters" id="filter-form" role="search">
+        <h3>Filter</h3>
+        <div class="filter-group">
+          <label for="f-q">Stichwort</label>
+          <input type="search" id="f-q" name="q" placeholder="z. B. Pflege, Koch …">
+        </div>
+        <div class="filter-group">
+          <label for="f-ort">Ort</label>
+          <input type="text" id="f-ort" name="ort" placeholder="z. B. Hamburg">
+        </div>
+        <div class="filter-group">
+          <label for="f-kategorie">Branche</label>
+          <select id="f-kategorie" name="kategorie"></select>
+        </div>
+        <div class="filter-group">
+          <span class="label">Anstellungsart</span>
+          <div id="type-filters"></div>
+        </div>
+        <div class="filter-group">
+          <label class="check"><input type="checkbox" name="remote"> Nur mit Homeoffice</label>
+        </div>
+        <button type="reset" class="btn btn-outline btn-block btn-small">Filter zurücksetzen</button>
+      </form>
+
+      <div>
+        <div class="results-head">
+          <p id="result-count" aria-live="polite"></p>
+          <label>
+            <span style="font-size:0.9rem;color:var(--muted)">Sortieren:</span>
+            <select id="sort" style="width:auto;display:inline-block;padding:7px 10px">
+              <option value="date">Neueste zuerst</option>
+              <option value="title">Titel (A–Z)</option>
+              <option value="location">Ort (A–Z)</option>
+            </select>
+          </label>
+        </div>
+        <div class="job-list" id="job-list"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

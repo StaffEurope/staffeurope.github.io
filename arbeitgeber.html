@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Für Arbeitgeber | Plata Arbeitsvermittlung</title>
+  <meta name="description" content="Finden Sie qualifizierte Fachkräfte mit Plata. Stellenanzeigen schnell veröffentlichen und erfolgsbasiert bezahlen.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="employer">
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Für Arbeitgeber</h1>
+        <p>Qualifizierte Fachkräfte finden – schnell, persönlich und erfolgsbasiert.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid-3">
+          <div class="card">
+            <div class="step-num">✓</div>
+            <h3>Vorqualifizierte Kandidat:innen</h3>
+            <p>Wir prüfen Profile vorab und stellen Ihnen nur passende Bewerber:innen vor.</p>
+          </div>
+          <div class="card">
+            <div class="step-num">€</div>
+            <h3>Nur bei Erfolg zahlen</h3>
+            <p>Das Inserieren ist kostenlos. Eine Vermittlungsprovision fällt erst bei Vertragsabschluss an.</p>
+          </div>
+          <div class="card">
+            <div class="step-num">☎</div>
+            <h3>Persönliche Betreuung</h3>
+            <p>Ihr:e feste:r Ansprechpartner:in kennt Ihr Unternehmen und Ihre Anforderungen.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt" id="formular" style="padding:10px 0">
+      <div class="container">
+        <div class="card form-card">
+          <h2 style="font-size:1.5rem">Stellenanzeige aufgeben</h2>
+          <p style="color:var(--muted);margin-top:-6px">Felder mit * sind Pflichtfelder.</p>
+          <div class="alert alert-success" id="employer-success" role="status"></div>
+
+          <form id="employer-form" novalidate>
+            <div class="form-section">
+              <h2>Unternehmen &amp; Kontakt</h2>
+              <div class="form-grid">
+                <div class="field full">
+                  <label for="e-company">Unternehmen *</label>
+                  <input type="text" id="e-company" name="company" required autocomplete="organization">
+                  <div class="error-msg">Bitte geben Sie den Namen Ihres Unternehmens an.</div>
+                </div>
+                <div class="field">
+                  <label for="e-contact">Ansprechpartner:in *</label>
+                  <input type="text" id="e-contact" name="contactName" required autocomplete="name">
+                  <div class="error-msg">Bitte geben Sie eine:n Ansprechpartner:in an.</div>
+                </div>
+                <div class="field">
+                  <label for="e-email">E-Mail *</label>
+                  <input type="email" id="e-email" name="contactEmail" required autocomplete="email">
+                  <div class="error-msg">Bitte geben Sie eine gültige E-Mail-Adresse an.</div>
+                </div>
+                <div class="field">
+                  <label for="e-phone">Telefon</label>
+                  <input type="tel" id="e-phone" name="contactPhone" autocomplete="tel">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h2>Stelle</h2>
+              <div class="form-grid">
+                <div class="field full">
+                  <label for="e-title">Stellentitel *</label>
+                  <input type="text" id="e-title" name="title" required placeholder="z. B. Bürokaufmann (m/w/d)">
+                  <div class="error-msg">Bitte geben Sie einen Stellentitel an.</div>
+                </div>
+                <div class="field">
+                  <label for="e-location">Arbeitsort *</label>
+                  <input type="text" id="e-location" name="location" required>
+                  <div class="error-msg">Bitte geben Sie den Arbeitsort an.</div>
+                </div>
+                <div class="field">
+                  <label for="e-salary">Gehalt <span class="hint">(optional)</span></label>
+                  <input type="text" id="e-salary" name="salary" placeholder="z. B. 3.000 € / Monat">
+                </div>
+                <div class="field">
+                  <label for="e-category">Branche *</label>
+                  <select id="e-category" name="category" required></select>
+                  <div class="error-msg">Bitte wählen Sie eine Branche.</div>
+                </div>
+                <div class="field">
+                  <label for="e-type">Anstellungsart *</label>
+                  <select id="e-type" name="type" required></select>
+                  <div class="error-msg">Bitte wählen Sie eine Anstellungsart.</div>
+                </div>
+                <div class="full">
+                  <label class="check"><input type="checkbox" name="remote"> Homeoffice möglich</label>
+                </div>
+                <div class="field full">
+                  <label for="e-description">Beschreibung *</label>
+                  <textarea id="e-description" name="description" required minlength="30" placeholder="Stellen Sie Ihr Unternehmen und die Position kurz vor."></textarea>
+                  <div class="error-msg">Bitte beschreiben Sie die Stelle (mindestens 30 Zeichen).</div>
+                </div>
+                <div class="field full">
+                  <label for="e-tasks">Aufgaben <span class="hint">(eine pro Zeile)</span></label>
+                  <textarea id="e-tasks" name="tasks"></textarea>
+                </div>
+                <div class="field full">
+                  <label for="e-req">Anforderungen <span class="hint">(eine pro Zeile)</span></label>
+                  <textarea id="e-req" name="requirements"></textarea>
+                </div>
+                <div class="field full">
+                  <label for="e-benefits">Benefits <span class="hint">(eine pro Zeile)</span></label>
+                  <textarea id="e-benefits" name="benefits"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <label class="consent" style="margin-bottom:18px">
+                <input type="checkbox" name="consent">
+                <span>Ich akzeptiere die Vermittlungsbedingungen und die <a href="datenschutz.html">Datenschutzerklärung</a>. *</span>
+              </label>
+              <button type="submit" class="btn btn-primary">Stellenanzeige veröffentlichen</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
