@@ -1,7 +1,6 @@
-# Plata – Personalvermittlung Südosteuropa → Deutschland
+# Danubia – Personalvermittlung Südosteuropa → Deutschland
 
-Website für die Vermittlung von Arbeitskräften aus Rumänien, Bulgarien, Kroatien und dem
-Westbalkan an Unternehmen in Deutschland. Reines HTML/CSS/JavaScript – kein Build-Schritt,
+Website für die Vermittlung von Arbeitskräften aus Südosteuropa an Unternehmen in Deutschland. Reines HTML/CSS/JavaScript – kein Build-Schritt,
 keine Cookies, keine externen Schriften oder Tracker.
 
 ## Seiten

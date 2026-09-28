@@ -1,4 +1,4 @@
-/* Plata – gemeinsame Logik für alle Seiten */
+/* Danubia – gemeinsame Logik für alle Seiten */
 
 /* ---------- Konfiguration in die Seite übernehmen ---------- */
 

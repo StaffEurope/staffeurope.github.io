@@ -3,7 +3,7 @@
  * ============================================================ */
 const SITE_CONFIG = {
   // Firmenname, wie er auf der Seite erscheinen soll
-  companyName: "Plata",
+  companyName: "Danubia",
 
   // Kontaktdaten (Platzhalter – bitte ersetzen!)
   email: "kontakt@ihre-domain.de",
