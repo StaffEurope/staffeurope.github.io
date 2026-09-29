@@ -5,8 +5,9 @@ const SITE_CONFIG = {
   // Firmenname, wie er auf der Seite erscheinen soll
   companyName: "Terravia",
 
-  // Kontaktdaten (Platzhalter – bitte ersetzen!)
-  email: "kontakt@ihre-domain.de",
+  // Kontaktdaten
+  email: "terravia.personal@zohomail.eu",
+  // Telefon und WhatsApp: Platzhalter – bitte ersetzen!
   phone: "+49 000 0000000",
   // WhatsApp-Nummer nur mit Ziffern, inkl. Ländervorwahl, ohne + und ohne 0 (z. B. 4915112345678)
   whatsapp: "490000000000",
