@@ -170,8 +170,11 @@ function initWorkerPage() {
   if (!form) return;
 
   document.querySelectorAll(".lang-switch").forEach((sw) => {
-    sw.innerHTML = LANGUAGES.map(
-      (l) => `<button type="button" data-lang="${l.code}" title="${l.name}" aria-pressed="false">${l.label}</button>`
+    const big = sw.classList.contains("lang-switch-big");
+    // Große Auswahl: Sprachen der Bewerber zuerst, Deutsch zuletzt
+    const langs = big ? [...LANGUAGES.filter((l) => l.code !== "de"), LANGUAGES[0]] : LANGUAGES;
+    sw.innerHTML = langs.map(
+      (l) => `<button type="button" data-lang="${l.code}" title="${l.name}" aria-pressed="false">${big ? l.name : l.label}</button>`
     ).join("");
     sw.addEventListener("click", (e) => {
       const btn = e.target.closest("button[data-lang]");
