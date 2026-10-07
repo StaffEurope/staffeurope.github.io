@@ -3,7 +3,7 @@
  * ============================================================ */
 const SITE_CONFIG = {
   // Firmenname, wie er auf der Seite erscheinen soll
-  companyName: "Plata",
+  companyName: "Terravia",
 
   // Kontaktdaten
   email: "terravia.personal@zohomail.eu",
