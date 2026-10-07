@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terravia – Arbeitskräfte aus Südosteuropa für Unternehmen in Deutschland</title>
-  <meta name="description" content="Personalvermittlung für deutsche Unternehmen: zuverlässige Fach- und Arbeitskräfte aus Südosteuropa – ausgewählt über geprüfte Partneragenturen, direkt bei Ihnen angestellt.">
+  <meta name="description" content="Personalvermittlung und Arbeitnehmerüberlassung über zugelassene Partner: zuverlässige Fach- und Arbeitskräfte aus den EU-Staaten Südosteuropas – ausgewählt über geprüfte Partneragenturen.">
   <meta name="theme-color" content="#050706">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -21,6 +21,7 @@
       </a>
       <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="Hauptnavigation">
+        <a href="#modelle">Modelle</a>
         <a href="#leistungen">Leistungen</a>
         <a href="#ablauf">Ablauf</a>
         <a href="#branchen">Branchen</a>
@@ -83,12 +84,33 @@
     <!-- ================= TRUST ================= -->
     <div class="trust">
       <div class="container">
-        <div class="trust-item"><strong>Direkte Anstellung</strong><span>Fest bei Ihnen angestellt – keine Leiharbeit.</span></div>
+        <div class="trust-item"><strong>Flexible Modelle</strong><span>Direktanstellung oder Arbeitnehmerüberlassung.</span></div>
         <div class="trust-item"><strong>Geprüfte Partneragenturen</strong><span>Vorauswahl direkt in den Herkunftsländern.</span></div>
         <div class="trust-item"><strong>Vollständige Unterlagen</strong><span>Alle Dokumente der Bewerber gesammelt für Sie.</span></div>
         <div class="trust-item"><strong>Realistische Planung</strong><span>Ehrliche Angaben zu Dauer und Voraussetzungen.</span></div>
       </div>
     </div>
+
+    <!-- ================= MODELLE ================= -->
+    <section class="section" id="modelle">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Zwei Modelle</div>
+          <h2>Direktanstellung oder Arbeitnehmerüberlassung.</h2>
+          <p>Sie entscheiden, welches Modell zu Ihrem Bedarf passt – dauerhaft oder für einen begrenzten Zeitraum.</p>
+        </div>
+        <div class="countries">
+          <div class="country-group">
+            <h3>Direktanstellung (Personalvermittlung)</h3>
+            <p>Wir vermitteln, Sie stellen ein: Der Arbeitsvertrag kommt direkt zwischen Ihrem Unternehmen und der Arbeitskraft zustande. Ideal für dauerhaften Personalbedarf.</p>
+          </div>
+          <div class="country-group">
+            <h3>Arbeitnehmerüberlassung (über Partner)</h3>
+            <p>Die Arbeitskräfte bleiben bei einem Personaldienstleister angestellt und werden Ihnen überlassen. Die Überlassung erfolgt ausschließlich durch Partner mit Erlaubnis nach dem Arbeitnehmerüberlassungsgesetz (AÜG). Ideal für Projekte und Saisonspitzen – nicht zulässig im Bauhauptgewerbe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ================= LEISTUNGEN ================= -->
     <section class="section section-light" id="leistungen">
@@ -234,7 +256,7 @@
           <div class="sig">— Ihr <span data-cfg="companyName">Terravia</span>-Team</div>
           <div class="facts">
             <div><span>Herkunft</span><span>Südosteuropa</span></div>
-            <div><span>Vertragsform</span><span>Direktanstellung bei Ihnen</span></div>
+            <div><span>Modelle</span><span>Direktanstellung oder Überlassung</span></div>
             <div><span>Referenzen</span><span>gern auf Anfrage</span></div>
           </div>
         </div>
@@ -251,7 +273,7 @@
         <div class="faq">
           <details>
             <summary>Werden die Arbeitskräfte bei uns angestellt?</summary>
-            <p>Ja. Wir sind Personalvermittler, keine Zeitarbeitsfirma. Die Mitarbeitenden erhalten einen regulären Arbeitsvertrag direkt bei Ihrem Unternehmen – zu denselben Bedingungen wie Ihre übrigen Beschäftigten.</p>
+            <p>Das entscheiden Sie. Bei der Direktanstellung erhalten die Mitarbeitenden einen regulären Arbeitsvertrag bei Ihrem Unternehmen. Bei der Arbeitnehmerüberlassung bleiben sie bei einem zugelassenen Personaldienstleister angestellt, der sie Ihnen nach den Regeln des Arbeitnehmerüberlassungsgesetzes (AÜG) überlässt.</p>
           </details>
           <details>
             <summary>Wie schnell kann jemand anfangen?</summary>
@@ -352,6 +374,15 @@
                 </select>
               </div>
               <div class="field full">
+                <label for="e-model">Gewünschtes Modell</label>
+                <select id="e-model" name="model">
+                  <option value="">Bitte wählen</option>
+                  <option>Direktanstellung</option>
+                  <option>Arbeitnehmerüberlassung</option>
+                  <option>Noch offen – bitte beraten</option>
+                </select>
+              </div>
+              <div class="field full">
                 <label for="e-start">Gewünschter Start</label>
                 <select id="e-start" name="start">
                   <option value="">Bitte wählen</option>
@@ -410,7 +441,7 @@
       </div>
       <div class="footer-bottom">
         <span>© <span data-year></span> <span data-cfg="companyName">Terravia</span></span>
-        <span>Arbeitsvermittlung · keine Arbeitnehmerüberlassung</span>
+        <span>Personalvermittlung · Arbeitnehmerüberlassung über zugelassene Partner</span>
       </div>
     </div>
   </footer>

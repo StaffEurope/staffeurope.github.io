@@ -36,7 +36,7 @@ body {
 
 a { color: var(--green-bright); text-decoration: none; }
 a:hover { text-decoration: underline; }
-h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; }
+h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; overflow-wrap: break-word; hyphens: auto; }
 
 .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
 
@@ -228,7 +228,7 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; }
 .about-panel blockquote { margin: 0; font-size: 1.25rem; line-height: 1.5; color: var(--white); position: relative; z-index: 1; }
 .about-panel .sig { margin-top: 18px; color: var(--green-bright); font-weight: 600; position: relative; z-index: 1; }
 .about-panel .facts { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line-dark); display: grid; gap: 10px; position: relative; z-index: 1; }
-.about-panel .facts div { display: flex; justify-content: space-between; gap: 12px; font-size: 0.93rem; }
+.about-panel .facts div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; font-size: 0.93rem; }
 .about-panel .facts span:first-child { color: var(--muted-light); }
 
 /* FAQ */
@@ -355,4 +355,15 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; }
   .trust-item { border-right: none; border-bottom: 1px solid var(--line-dark); }
   .trust-item:last-child { border-bottom: none; }
   .header-langs { display: none; }
+}
+
+/* Lange deutsche Wörter (z. B. Arbeitnehmerüberlassung) und sehr schmale Handys */
+body { overflow-wrap: break-word; hyphens: auto; }
+.grid-2 > *, .grid-3 > *, .countries > *, .contact-wrap > *, .steps > *, .sectors > * { min-width: 0; }
+.contact-line span { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 360px) {
+  .container { padding: 0 14px; }
+  .logo { font-size: 1.1rem; gap: 8px; }
+  .lang-switch button { padding: 6px 7px; }
+  .about-panel, .form-card { padding: 20px; }
 }
