@@ -102,7 +102,8 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; overflow-wrap: break-wor
     var(--black);
   padding: 90px 0 100px;
 }
-.hero .container { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 50px; align-items: center; }
+.hero .container { display: grid; grid-template-columns: 1fr; gap: 50px; align-items: center; }
+.hero h1 { max-width: 760px; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
   color: var(--green-bright); background: var(--green-soft); border: 1px solid rgba(47, 191, 113, 0.3);
@@ -117,21 +118,7 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; overflow-wrap: break-wor
 .hero-langs a { color: var(--text-light); border-bottom: 1px dashed #3b4d43; margin-left: 6px; }
 .hero-langs a:hover { color: var(--green-bright); text-decoration: none; }
 
-.route-card {
-  background: linear-gradient(180deg, var(--dark-2), var(--black));
-  border: 1px solid var(--line-dark); border-radius: 20px; padding: 22px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-}
-.route-card h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-light); margin: 0 0 8px; font-weight: 600; }
-.route-card svg { width: 100%; height: auto; display: block; }
-.route-card .legend { display: flex; gap: 16px; font-size: 0.8rem; color: var(--muted-light); margin-top: 8px; flex-wrap: wrap; }
-.route-card .legend span::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
-.route-card .legend .eu::before { background: var(--green-bright); }
-.route-card .legend .wb::before { background: transparent; border: 2px solid var(--green-bright); width: 7px; height: 7px; }
-
-.route-path { stroke-dasharray: 5 6; animation: dash 1.6s linear infinite; }
-@keyframes dash { to { stroke-dashoffset: -22; } }
-@media (prefers-reduced-motion: reduce) { .route-path { animation: none; } html { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 /* ---------- Trust bar ---------- */
 .trust { background: var(--dark-2); border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); }
