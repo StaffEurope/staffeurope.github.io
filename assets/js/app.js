@@ -1,4 +1,4 @@
-/* Terravia – gemeinsame Logik für alle Seiten */
+/* Plata – gemeinsame Logik für alle Seiten */
 
 /* ---------- Konfiguration in die Seite übernehmen ---------- */
 
