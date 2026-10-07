@@ -143,8 +143,7 @@ function detectLang() {
     if (saved && I18N[saved]) return saved;
   } catch {}
   const browser = (navigator.language || "de").slice(0, 2).toLowerCase();
-  if (browser === "ro" || browser === "bg") return browser;
-  if (["sr", "hr", "bs", "sh", "cnr"].includes(browser)) return "sr";
+  if (["ro", "bg", "hr"].includes(browser)) return browser;
   return "de";
 }
 

@@ -8,10 +8,10 @@ keine Cookies, keine externen Schriften oder Tracker.
 | Datei | Zielgruppe | Inhalt |
 | --- | --- | --- |
 | `index.html` | Deutsche Arbeitgeber | Leistungen, Ablauf, Branchen, Herkunftsländer, Über uns, FAQ, Anfrageformular |
-| `bewerber.html` | Arbeitskräfte | Vorteile, Ablauf, Bewerbungsformular + WhatsApp – umschaltbar: Deutsch, Rumänisch, Bulgarisch, Serbisch/Kroatisch/Bosnisch |
+| `bewerber.html` | Arbeitskräfte | Vorteile, Ablauf, Bewerbungsformular + WhatsApp – umschaltbar: Deutsch, Rumänisch, Bulgarisch, Kroatisch |
 | `impressum.html`, `datenschutz.html` | – | **Platzhalter – vor Veröffentlichung ausfüllen und prüfen lassen** |
 
-Direkte Links für Bewerber in ihrer Sprache: `bewerber.html?lang=ro`, `?lang=bg`, `?lang=sr`, `?lang=de`.
+Direkte Links für Bewerber in ihrer Sprache: `bewerber.html?lang=ro`, `?lang=bg`, `?lang=hr`, `?lang=de`.
 
 ## Vor dem Online-Stellen anpassen
 
