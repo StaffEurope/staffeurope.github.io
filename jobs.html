@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stellenangebote in Deutschland | Terravia</title>
+  <meta name="description" content="Jobbörse: aktuelle Stellen bei Unternehmen in Deutschland. Locuri de muncă în Germania · Работа в Германия · Poslovi u Njemačkoj.">
+  <meta name="theme-color" content="#050706">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-title-key="jobs.meta.title">
+  <a class="skip-link" href="#main">↓</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="assets/img/logo/terravia-icon.svg" alt="" width="38" height="38">
+        <span data-cfg="companyName">Terravia</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:14px">
+        <a href="index.html" class="header-langs" style="color:var(--muted-light);font-size:0.9rem" data-i18n="nav.employers">Für Arbeitgeber</a>
+        <div class="lang-switch" role="group" aria-label="Sprache / Limba / Език / Jezik"></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero worker-hero jobs-hero">
+      <div class="container">
+        <div class="lang-pick">
+          <p>Alegeți limba · Изберете език · Odaberite jezik · Sprache wählen</p>
+          <div class="lang-switch lang-switch-big" role="group" aria-label="Limba / Език / Jezik / Sprache"></div>
+        </div>
+        <span class="eyebrow" data-i18n="jobs.eyebrow">Jobbörse</span>
+        <h1 data-i18n="jobs.title">Aktuelle Stellen in <em>Deutschland</em></h1>
+        <p class="lead" data-i18n="jobs.lead"></p>
+      </div>
+    </section>
+
+    <section class="section section-light jobs-section">
+      <div class="container">
+        <div class="job-toolbar">
+          <div class="field job-search">
+            <label for="job-search" class="sr-only" data-i18n="jobs.search"></label>
+            <input id="job-search" type="search" data-i18n-ph="jobs.search" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="job-sector" data-i18n="jobs.filter.sector"></label>
+            <select id="job-sector"></select>
+          </div>
+          <div class="field">
+            <label for="job-type" data-i18n="jobs.filter.type"></label>
+            <select id="job-type"></select>
+          </div>
+        </div>
+        <p class="job-count" id="job-count" aria-live="polite"></p>
+
+        <div class="job-list" id="job-list"></div>
+
+        <div class="job-empty" id="job-empty" hidden>
+          <h3 data-i18n="jobs.none.t"></h3>
+          <p data-i18n="jobs.none.d"></p>
+          <div class="hero-actions">
+            <a class="btn btn-green" href="bewerber.html#bewerbung" data-lang-href="bewerber.html#bewerbung" data-i18n="jobs.none.cta"></a>
+            <a class="btn btn-whatsapp" data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener" data-i18n="hero.whatsapp"></a>
+            <button type="button" class="btn btn-ghost-dark job-reset" data-i18n="jobs.reset" hidden></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-black">
+      <div class="container">
+        <div class="employer-box">
+          <div>
+            <h2 data-i18n="jobs.employer.t">Sie sind Arbeitgeber?</h2>
+            <p data-i18n="jobs.employer.d"></p>
+          </div>
+          <a class="btn btn-green" href="index.html#kontakt" data-i18n="jobs.employer.cta">Stelle melden</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="margin-top:0;border-top:none;padding-top:0">
+        <span>© <span data-year></span> <span data-cfg="companyName">Terravia</span></span>
+        <span><a href="impressum.html" style="display:inline;margin-right:14px">Impressum</a><a href="datenschutz.html" style="display:inline">Datenschutz</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/jobs.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

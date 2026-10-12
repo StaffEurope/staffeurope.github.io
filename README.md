@@ -9,6 +9,7 @@ keine Cookies, keine externen Schriften oder Tracker.
 | --- | --- | --- |
 | `index.html` | Deutsche Arbeitgeber | Leistungen, Ablauf, Branchen, Herkunftsländer, Über uns, FAQ, Anfrageformular |
 | `bewerber.html` | Arbeitskräfte | Vorteile, Ablauf, Bewerbungsformular + WhatsApp – umschaltbar: Deutsch, Rumänisch, Bulgarisch, Kroatisch |
+| `jobs.html` | Arbeitskräfte | Jobbörse: offene Stellen mit Suche und Filtern, „Auf diese Stelle bewerben“ und WhatsApp – in allen vier Sprachen |
 | `impressum.html`, `datenschutz.html` | – | **Platzhalter – vor Veröffentlichung ausfüllen und prüfen lassen** |
 
 Direkte Links für Bewerber in ihrer Sprache: `bewerber.html?lang=ro`, `?lang=bg`, `?lang=hr`, `?lang=de`.
@@ -33,5 +34,6 @@ python3 -m http.server 8000   # dann http://localhost:8000
 
 - `assets/css/style.css` – Design (Grün/Weiß/Dunkel, responsiv)
 - `assets/js/config.js` – Ihre Kontaktdaten
-- `assets/js/i18n.js` – Übersetzungen der Bewerberseite
+- `assets/js/i18n.js` – Übersetzungen der Bewerberseite und der Jobbörse
+- `assets/js/jobs.js` – Stellenangebote der Jobbörse (Anleitung und Vorlage stehen oben in der Datei)
 - `assets/js/app.js` – Menü, Formulare, Sprachumschaltung
