@@ -14,7 +14,7 @@ const I18N = {
     "nav.employers": "Für Arbeitgeber",
     "hero.eyebrow": "Arbeiten in Deutschland",
     "hero.title": "Sicherer Job in Deutschland – <em>fair und legal</em>.",
-    "hero.lead": "Wir vermitteln Arbeitskräfte aus Südosteuropa an geprüfte Unternehmen in Deutschland. Sie bekommen einen regulären Arbeitsvertrag – direkt beim Unternehmen oder bei einem zugelassenen Personaldienstleister – und wir bringen Sie zu Ihrem neuen Arbeitsplatz.",
+    "hero.lead": "Wir vermitteln Arbeitskräfte aus dem europäischen Ausland an geprüfte Unternehmen in Deutschland. Sie bekommen einen regulären Arbeitsvertrag – direkt beim Unternehmen oder bei einem zugelassenen Personaldienstleister – und wir bringen Sie zu Ihrem neuen Arbeitsplatz.",
     "hero.cta": "Jetzt bewerben",
     "hero.whatsapp": "WhatsApp schreiben",
     "benefits.kicker": "Was wir bieten",
