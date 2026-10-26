@@ -365,6 +365,18 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; overflow-wrap: break-wor
   .job, .job-empty, .employer-box { padding: 20px; }
 }
 
+/* ---------- Einflug-Animation (Branchen) ---------- */
+.fly .sector { opacity: 0; transform: translate(var(--fx, 0), 48px) scale(0.96); }
+.fly .sector:nth-child(odd) { --fx: -36px; }
+.fly .sector:nth-child(even) { --fx: 36px; }
+#branchen { overflow-x: clip; }
+@media (max-width: 600px) { .fly .sector:nth-child(n) { --fx: 0px; } }
+.fly .sector.in {
+  opacity: 1; transform: none;
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.15s;
+  transition-delay: var(--delay, 0s);
+}
+
 /* ---------- Footer ---------- */
 .site-footer { background: var(--black); border-top: 1px solid var(--line-dark); padding: 56px 0 26px; font-size: 0.93rem; color: var(--muted-light); }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }

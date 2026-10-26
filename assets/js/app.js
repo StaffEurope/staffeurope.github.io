@@ -396,6 +396,27 @@ function initWorkerPage() {
   });
 }
 
+/* ---------- Einflug-Animation der Branchen ---------- */
+
+function initFlyIn() {
+  const grid = document.querySelector(".sectors");
+  if (!grid || !("IntersectionObserver" in window)) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cards = [...grid.querySelectorAll(".sector")];
+  const cols = () => getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+  grid.classList.add("fly");
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const i = cards.indexOf(e.target);
+      e.target.style.setProperty("--delay", `${(i % cols()) * 0.12}s`);
+      e.target.classList.add("in");
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+  cards.forEach((c) => io.observe(c));
+}
+
 /* ---------- Start ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -405,4 +426,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initLangSwitch();
   initJobBoard();
   initWorkerPage();
+  initFlyIn();
 });
