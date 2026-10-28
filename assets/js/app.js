@@ -17,6 +17,10 @@ function applyConfig() {
   document.querySelectorAll("[data-cfg-href='email']").forEach((el) => (el.href = `mailto:${c.email}`));
   document.querySelectorAll("[data-cfg-href='whatsapp']").forEach((el) => (el.href = `https://wa.me/${c.whatsapp}`));
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
+  // Leere Kontaktdaten (z. B. Telefon/WhatsApp vorübergehend ausgeblendet) samt Button/Zeile verbergen
+  document.querySelectorAll("[data-needs]").forEach((el) => {
+    if (!c[el.dataset.needs]) el.hidden = true;
+  });
 }
 
 /* ---------- Mobiles Menü ---------- */
@@ -253,7 +257,7 @@ function jobCard(job) {
       </details>` : ""}
       <div class="job-actions">
         <a class="btn btn-green btn-small" href="${apply}">${t("jobs.apply")}</a>
-        <button type="button" class="btn btn-whatsapp btn-small" data-wa-job="${esc(job.id)}">${t("jobs.whatsapp")}</button>
+        ${SITE_CONFIG.whatsapp ? `<button type="button" class="btn btn-whatsapp btn-small" data-wa-job="${esc(job.id)}">${t("jobs.whatsapp")}</button>` : ""}
       </div>
       <p class="job-ref">${t("jobs.ref")} ${esc(job.id)}${job.datum ? ` · ${t("jobs.posted")} ${esc(formatDate(job.datum))}` : ""}</p>
     </article>`;

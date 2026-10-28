@@ -38,7 +38,7 @@
         <p class="lead" data-i18n="hero.lead"></p>
         <div class="hero-actions">
           <a href="#bewerbung" class="btn btn-green" data-i18n="hero.cta">Jetzt bewerben</a>
-          <a data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp" data-i18n="hero.whatsapp">WhatsApp</a>
+          <a data-cfg-href="whatsapp" data-needs="whatsapp" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp" data-i18n="hero.whatsapp">WhatsApp</a>
           <a href="jobs.html" data-lang-href="jobs.html" class="btn btn-ghost" data-i18n="jobs.browse">Offene Stellen ansehen</a>
         </div>
       </div>
@@ -82,11 +82,11 @@
           <h2 data-i18n="contact.t"></h2>
           <p data-i18n="contact.d"></p>
           <div class="contact-lines">
-            <a class="contact-line" data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener">
+            <a class="contact-line" data-cfg-href="whatsapp" data-needs="whatsapp" href="#" target="_blank" rel="noopener">
               <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
               <span><small>WhatsApp</small><span data-cfg="phone"></span></span>
             </a>
-            <a class="contact-line" data-cfg-href="phone" href="#">
+            <a class="contact-line" data-needs="phone" data-cfg-href="phone" href="#">
               <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
               <span><small data-i18n="contact.call">Anrufen</small><span data-cfg="phone"></span></span>
             </a>
@@ -168,7 +168,7 @@
               </label>
               <div class="full" style="display:grid;gap:10px">
                 <button type="submit" class="btn btn-green btn-block" data-i18n="f.submit"></button>
-                <button type="button" id="worker-whatsapp" class="btn btn-whatsapp btn-block" data-i18n="f.whatsapp"></button>
+                <button type="button" id="worker-whatsapp" data-needs="whatsapp" class="btn btn-whatsapp btn-block" data-i18n="f.whatsapp"></button>
               </div>
             </div>
           </form>

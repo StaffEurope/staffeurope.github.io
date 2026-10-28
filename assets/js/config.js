@@ -7,9 +7,10 @@ const SITE_CONFIG = {
 
   // Kontaktdaten
   email: "terravia.personal@zohomail.eu",
-  phone: "+49 152 54651727",
+  // Telefon und WhatsApp vorübergehend ausgeblendet (leer = wird auf der Seite nicht angezeigt).
+  phone: "",
   // WhatsApp-Nummer nur mit Ziffern, inkl. Ländervorwahl, ohne + und ohne 0 (z. B. 4915112345678)
-  whatsapp: "4915254651727",
+  whatsapp: "",
 
   // Optional: Adresse eines Formular-Dienstes (z. B. https://formspree.io/f/xxxxxx).
   // Leer lassen = Anfragen öffnen das E-Mail-Programm mit vorausgefüllter Nachricht.
