@@ -377,6 +377,20 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; overflow-wrap: break-wor
   transition-delay: var(--delay, 0s);
 }
 
+/* ---------- Hintergrund: Menschen bei der Arbeit, wechselt beim Scrollen ---------- */
+.scroll-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+.scroll-bg-img {
+  position: absolute; inset: -20px; background: center / cover no-repeat;
+  opacity: 0; transition: opacity 1.2s ease; filter: grayscale(0.35) blur(2px);
+}
+.scroll-bg-img.on { opacity: 1; }
+.scroll-bg::after { content: ""; position: absolute; inset: 0; background: rgba(5, 7, 6, 0.84); }
+.has-scroll-bg .section-black { background: rgba(5, 7, 6, 0.7); }
+.contact-promises { margin-top: 22px; }
+.contact-promises li { color: var(--muted-light); font-size: 0.95rem; }
+.contact-promises strong { color: var(--white); }
+@media (prefers-reduced-motion: reduce) { .scroll-bg-img { transition: none; } }
+
 /* ---------- Footer ---------- */
 .site-footer { background: var(--black); border-top: 1px solid var(--line-dark); padding: 56px 0 26px; font-size: 0.93rem; color: var(--muted-light); }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }

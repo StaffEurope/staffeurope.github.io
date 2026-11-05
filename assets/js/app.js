@@ -421,6 +421,41 @@ function initFlyIn() {
   cards.forEach((c) => io.observe(c));
 }
 
+/* ---------- Hintergrundbilder beim Scrollen ---------- */
+
+function initScrollBg() {
+  const layers = [...document.querySelectorAll(".scroll-bg-img")];
+  if (!layers.length) return;
+  document.body.classList.add("has-scroll-bg");
+  const load = (el) => {
+    if (el && el.dataset.bg) {
+      el.style.backgroundImage = `url("${el.dataset.bg}")`;
+      delete el.dataset.bg;
+    }
+  };
+  let current = -1;
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const progress = max > 0 ? scrollY / max : 0;
+    const i = Math.min(layers.length - 1, Math.floor(progress * layers.length));
+    if (i === current) return;
+    load(layers[i]);
+    load(layers[i + 1]); // nächstes Bild schon vorladen
+    layers.forEach((el, n) => el.classList.toggle("on", n === i));
+    current = i;
+  };
+  addEventListener("scroll", () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }, { passive: true });
+  addEventListener("resize", update);
+  update();
+}
+
 /* ---------- Start ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -431,4 +466,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initJobBoard();
   initWorkerPage();
   initFlyIn();
+  initScrollBg();
 });
