@@ -456,6 +456,66 @@ function initScrollBg() {
   update();
 }
 
+/* ---------- Dynamik: Einblenden, Kopfzeile, Fortschritt, Wortwechsel ---------- */
+
+const REVEAL = ".section-head, .step, .model, .trust-item, .about-points li, .about-panel, .faq details, .contact-info, .form-card, .benefit, .country-group, .employer-box, .lang-pick, .prose > *";
+const calm = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function initReveal() {
+  if (calm() || !("IntersectionObserver" in window)) return;
+  const els = [...document.querySelectorAll(REVEAL)].filter((el) => !el.closest(".sectors"));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const sibs = [...e.target.parentElement.children].filter((c) => c.classList.contains("reveal"));
+      e.target.style.setProperty("--delay", `${(Math.max(0, sibs.indexOf(e.target)) % 4) * 0.08}s`);
+      e.target.classList.add("in");
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
+  els.forEach((el) => {
+    el.classList.add("reveal");
+    io.observe(el);
+  });
+}
+
+function initHeaderAndProgress() {
+  const header = document.querySelector(".site-header");
+  const bar = document.createElement("div");
+  bar.className = "scroll-progress";
+  bar.setAttribute("aria-hidden", "true");
+  document.body.prepend(bar);
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`;
+    header?.classList.toggle("scrolled", scrollY > 10);
+  };
+  addEventListener("scroll", () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }, { passive: true });
+  update();
+}
+
+function initRotator() {
+  const el = document.querySelector(".rotator");
+  if (!el || calm()) return;
+  const words = el.dataset.words.split("|");
+  let i = 0;
+  setInterval(() => {
+    el.classList.add("out");
+    setTimeout(() => {
+      i = (i + 1) % words.length;
+      el.textContent = words[i];
+      el.classList.remove("out");
+    }, 350);
+  }, 2400);
+}
+
 /* ---------- Start ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -467,4 +527,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initWorkerPage();
   initFlyIn();
   initScrollBg();
+  initReveal();
+  initHeaderAndProgress();
+  initRotator();
 });

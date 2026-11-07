@@ -391,6 +391,40 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; overflow-wrap: break-wor
 .contact-promises strong { color: var(--white); }
 @media (prefers-reduced-motion: reduce) { .scroll-bg-img { transition: none; } }
 
+/* ---------- Dynamik: Einblenden, Kopfzeile, Fortschritt, Hover ---------- */
+.reveal { opacity: 0; transform: translateY(28px); }
+.reveal.in {
+  opacity: 1; transform: none;
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: var(--delay, 0s);
+}
+.site-header { transition: background 0.25s, box-shadow 0.25s; }
+.site-header.scrolled { background: rgba(5, 7, 6, 0.97); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60;
+  background: linear-gradient(90deg, var(--green-dark), var(--green-bright));
+  transform-origin: 0 50%; transform: scaleX(0); pointer-events: none;
+}
+.hero-rotator { margin: -6px 0 22px; font-size: clamp(1.05rem, 2vw, 1.3rem); font-weight: 700; color: var(--text-light); }
+.rotator { display: inline-block; color: var(--green-bright); transition: opacity 0.35s, transform 0.35s; }
+.rotator.out { opacity: 0; transform: translateY(-10px); }
+.step, .model, .country-group, .benefit, .service, .job, .contact-line, .btn { will-change: auto; }
+.step, .model, .country-group, .benefit { transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+.reveal.in.step, .reveal.in.model, .reveal.in.country-group, .reveal.in.benefit { transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s; }
+.step:hover, .model:hover, .country-group:hover, .benefit:hover,
+.reveal.in.step:hover, .reveal.in.model:hover, .reveal.in.country-group:hover, .reveal.in.benefit:hover {
+  transform: translateY(-4px); border-color: var(--green); transition-delay: 0s;
+}
+.fly .sector.in:hover { transform: translateY(-4px); border-color: var(--green); transition-delay: 0s; }
+.sector-img { transition: transform 0.5s ease; }
+.sector:hover .sector-img { transform: scale(1.05); }
+.btn-green { box-shadow: 0 0 0 0 rgba(47, 191, 113, 0.5); }
+.btn-green:hover { box-shadow: 0 6px 18px rgba(47, 191, 113, 0.35); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+  .rotator, .sector-img, .step, .model, .country-group, .benefit { transition: none; }
+}
+
 /* ---------- Footer ---------- */
 .site-footer { background: var(--black); border-top: 1px solid var(--line-dark); padding: 56px 0 26px; font-size: 0.93rem; color: var(--muted-light); }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
