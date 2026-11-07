@@ -458,7 +458,7 @@ function initScrollBg() {
 
 /* ---------- Dynamik: Einblenden, Kopfzeile, Fortschritt, Wortwechsel ---------- */
 
-const REVEAL = ".section-head, .step, .model, .trust-item, .about-points li, .about-panel, .faq details, .contact-info, .form-card, .benefit, .country-group, .employer-box, .lang-pick, .prose > *";
+const REVEAL = ".section-head, .step, .steps-line li, .model, .trust-item, .about-points li, .about-panel, .faq details, .contact-info, .form-card, .benefit, .country-group, .employer-box, .lang-pick, .prose > *";
 const calm = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function initReveal() {
@@ -475,6 +475,12 @@ function initReveal() {
   }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
   els.forEach((el) => {
     el.classList.add("reveal");
+    // Leiste unter dem Startbereich: abwechselnd von links und rechts einfliegen
+    if (el.matches(".trust-item")) {
+      const i = [...el.parentElement.children].indexOf(el);
+      el.classList.add("reveal-x");
+      el.style.setProperty("--rx", i % 2 ? "70px" : "-70px");
+    }
     io.observe(el);
   });
 }
