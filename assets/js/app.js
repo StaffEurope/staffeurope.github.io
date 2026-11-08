@@ -577,6 +577,149 @@ function initRotator() {
   }, 2400);
 }
 
+/* ---------- Gewerke: Detailansicht mit Bild-Einflug ---------- */
+
+function initGewerke() {
+  const cards = [...document.querySelectorAll(".sector[data-gewerk]")];
+  if (!cards.length || typeof GEWERKE === "undefined") return;
+  const list = (items) => `<ul>${items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`;
+  const img = (g) => `assets/img/branchen/${g.id}.webp`;
+
+  const modal = document.createElement("div");
+  modal.className = "gw-modal";
+  modal.hidden = true;
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("aria-labelledby", "gw-title");
+  modal.innerHTML = `
+    <div class="gw-bg"></div>
+    <div class="gw-fly"><img alt=""></div>
+    <button type="button" class="gw-close" aria-label="Schließen">×</button>
+    <div class="gw-scroll"><div class="container gw-content"></div></div>`;
+  document.body.appendChild(modal);
+  const bg = modal.querySelector(".gw-bg");
+  const fly = modal.querySelector(".gw-fly");
+  const flyImg = fly.querySelector("img");
+  const content = modal.querySelector(".gw-content");
+  const scroller = modal.querySelector(".gw-scroll");
+  let index = 0;
+  let opener = null;
+  let timers = [];
+  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+  const clear = () => { timers.forEach(clearTimeout); timers = []; };
+
+  function render(g) {
+    const i = GEWERKE.indexOf(g);
+    const prev = GEWERKE[(i + GEWERKE.length - 1) % GEWERKE.length];
+    const next = GEWERKE[(i + 1) % GEWERKE.length];
+    content.innerHTML = `
+      <div class="gw-head gw-part">
+        <div class="kicker">Gewerk ${i + 1} von ${GEWERKE.length}</div>
+        <h2 id="gw-title">${esc(g.name)}</h2>
+        <p>${esc(g.lead)}</p>
+      </div>
+      <div class="gw-grid">
+        <div class="gw-box gw-part"><h3>Typische Tätigkeiten</h3>${list(g.tasks)}</div>
+        <div class="gw-box gw-part"><h3>Anforderungen</h3>${list(g.req)}</div>
+        <div class="gw-box gw-part gw-lang"><h3>Sprachniveau Deutsch</h3><div class="gw-level">${esc(g.lang)}</div><p>${esc(g.langText)}</p></div>
+        <div class="gw-box gw-part"><h3>Nachweise, die Bewerber mitbringen sollten</h3>${list(g.proof)}</div>
+      </div>
+      ${g.note ? `<p class="gw-note gw-part">${esc(g.note)}</p>` : ""}
+      <div class="gw-eu gw-part">
+        <h3>EU-Freizügigkeit</h3>
+        <p>Unsere Bewerber kommen aus EU-Mitgliedstaaten. Sie dürfen in Deutschland ohne Visum und ohne Arbeitserlaubnis arbeiten. Nötig sind ein gültiger Personalausweis oder Reisepass, die Anmeldung am Wohnort in Deutschland, eine Steuer-ID und eine Krankenversicherung – die Sozialversicherung läuft über den Arbeitgeber.</p>
+      </div>
+      <div class="gw-actions gw-part">
+        <button type="button" class="btn btn-green" data-gw-request>Personal für ${esc(g.name)} anfragen</button>
+        <div class="gw-nav">
+          <button type="button" class="btn btn-ghost" data-gw-go="-1">← ${esc(prev.name)}</button>
+          <button type="button" class="btn btn-ghost" data-gw-go="1">${esc(next.name)} →</button>
+        </div>
+      </div>
+      <p class="gw-small gw-part">Allgemeine Orientierung. Die genauen Anforderungen legt der jeweilige Arbeitgeber fest; bei reglementierten Berufen entscheidet die zuständige Stelle.</p>`;
+    content.querySelectorAll(".gw-part").forEach((el, n) => {
+      el.style.setProperty("--d", `${n * 0.07}s`);
+      el.style.setProperty("--side", n % 2 ? "1" : "-1");
+    });
+  }
+
+  // Ablauf: Bild fliegt herein → hält kurz → fliegt nach hinten weg und wird Hintergrund → Texte drehen sich herein
+  function show(i, dir = 1) {
+    clear();
+    index = (i + GEWERKE.length) % GEWERKE.length;
+    const g = GEWERKE[index];
+    history.replaceState(null, "", `#gewerk-${g.id}`);
+    modal.classList.remove("gw-text");
+    content.classList.add("gw-out");
+    const run = () => {
+      render(g);
+      scroller.scrollTop = 0;
+      flyImg.src = img(g);
+      modal.style.setProperty("--dir", dir);
+      if (calm()) {
+        bg.style.backgroundImage = `url("${img(g)}")`;
+        bg.classList.add("on");
+        content.classList.remove("gw-out");
+        modal.classList.add("gw-text");
+        return;
+      }
+      fly.className = "gw-fly";
+      void fly.offsetWidth;
+      fly.classList.add("in");
+      later(() => fly.classList.add("back"), 1300);
+      later(() => { bg.style.backgroundImage = `url("${img(g)}")`; bg.classList.add("on"); }, 1350);
+      later(() => { content.classList.remove("gw-out"); modal.classList.add("gw-text"); }, 1650);
+    };
+    if (modal.hidden) run(); else later(run, 350);
+  }
+
+  function open(i, el) {
+    opener = el || null;
+    modal.hidden = false;
+    document.documentElement.classList.add("gw-lock");
+    requestAnimationFrame(() => modal.classList.add("open"));
+    bg.classList.remove("on");
+    show(i);
+    modal.querySelector(".gw-close").focus({ preventScroll: true });
+  }
+
+  function close() {
+    clear();
+    modal.classList.remove("open", "gw-text");
+    document.documentElement.classList.remove("gw-lock");
+    history.replaceState(null, "", location.pathname + location.search);
+    setTimeout(() => { modal.hidden = true; fly.className = "gw-fly"; }, 350);
+    opener?.focus({ preventScroll: true });
+  }
+
+  cards.forEach((card) => {
+    const i = GEWERKE.findIndex((g) => g.id === card.dataset.gewerk);
+    card.addEventListener("click", () => open(i, card));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i, card); }
+    });
+  });
+  modal.querySelector(".gw-close").addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    const go = e.target.closest("[data-gw-go]");
+    if (go) show(index + Number(go.dataset.gwGo), Number(go.dataset.gwGo));
+    if (e.target.closest("[data-gw-request]")) {
+      const sel = document.getElementById("e-sector");
+      if (sel) sel.value = GEWERKE[index].name;
+      close();
+      document.getElementById("kontakt")?.scrollIntoView({ behavior: calm() ? "auto" : "smooth" });
+    }
+  });
+  addEventListener("keydown", (e) => {
+    if (modal.hidden) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowRight") show(index + 1, 1);
+    if (e.key === "ArrowLeft") show(index - 1, -1);
+  });
+  const fromHash = GEWERKE.findIndex((g) => location.hash === `#gewerk-${g.id}`);
+  if (fromHash >= 0) open(fromHash);
+}
+
 /* ---------- Start ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -592,4 +735,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeaderAndProgress();
   initRotator();
   initHeroScreens();
+  initGewerke();
 });
