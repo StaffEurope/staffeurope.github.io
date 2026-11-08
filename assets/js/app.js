@@ -577,13 +577,35 @@ function initRotator() {
   }, 2400);
 }
 
-/* ---------- Gewerke: Detailansicht mit Bild-Einflug ---------- */
+/* ---------- Gewerke: Liste mit großem Bild + filmische Detailansicht ---------- */
+
+function initTrades() {
+  const trades = [...document.querySelectorAll(".trade")];
+  const frame = document.querySelectorAll(".trade-frame img");
+  if (!trades.length) return;
+  const activate = (i) => {
+    trades.forEach((t, n) => t.classList.toggle("active", n === i));
+    frame.forEach((img, n) => img.classList.toggle("on", n === i));
+  };
+  activate(0);
+  trades.forEach((t, i) => {
+    t.addEventListener("mouseenter", () => activate(i));
+    t.addEventListener("focus", () => activate(i));
+  });
+  // beim Scrollen wird das Gewerk in der Bildschirmmitte aktiv
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.isIntersecting && activate(trades.indexOf(e.target)));
+    }, { rootMargin: "-45% 0px -45% 0px" });
+    trades.forEach((t) => io.observe(t));
+  }
+}
 
 function initGewerke() {
-  const cards = [...document.querySelectorAll(".sector[data-gewerk]")];
-  if (!cards.length || typeof GEWERKE === "undefined") return;
-  const list = (items) => `<ul>${items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`;
+  const triggers = [...document.querySelectorAll("[data-gewerk]")];
+  if (!triggers.length || typeof GEWERKE === "undefined") return;
   const img = (g) => `assets/img/branchen/${g.id}.webp`;
+  const N = GEWERKE.length;
 
   const modal = document.createElement("div");
   modal.className = "gw-modal";
@@ -592,129 +614,148 @@ function initGewerke() {
   modal.setAttribute("aria-modal", "true");
   modal.setAttribute("aria-labelledby", "gw-title");
   modal.innerHTML = `
-    <div class="gw-bg"></div>
-    <div class="gw-fly"><img alt=""></div>
+    <div class="gw-bg"><div class="gw-img"></div></div>
+    <div class="gw-shade"></div>
+    <div class="gw-bar"></div>
     <button type="button" class="gw-close" aria-label="Schließen">×</button>
-    <div class="gw-scroll"><div class="container gw-content"></div></div>`;
+    <nav class="gw-dots" aria-label="Kapitel"></nav>
+    <div class="gw-scroll"><div class="gw-story"></div></div>`;
   document.body.appendChild(modal);
-  const bg = modal.querySelector(".gw-bg");
-  const fly = modal.querySelector(".gw-fly");
-  const flyImg = fly.querySelector("img");
-  const content = modal.querySelector(".gw-content");
+  const bgImg = modal.querySelector(".gw-img");
   const scroller = modal.querySelector(".gw-scroll");
-  let index = 0;
-  let opener = null;
-  let timers = [];
+  const story = modal.querySelector(".gw-story");
+  const dots = modal.querySelector(".gw-dots");
+  const bar = modal.querySelector(".gw-bar");
+  let index = 0, opener = null, io = null, timers = [];
   const later = (fn, ms) => timers.push(setTimeout(fn, ms));
-  const clear = () => { timers.forEach(clearTimeout); timers = []; };
+
+  const letters = (txt) => [...txt].map((c, k) => (c === " " ? " " : `<span class="ch" style="--c:${k}">${esc(c)}</span>`)).join("");
+  const lines = (items, cls = "") => `<ul class="gw-lines">${items.map((t, k) => `<li class="${cls}" data-a style="--k:${k + 2};--s:${k % 2 ? 1 : -1}">${esc(t)}</li>`).join("")}</ul>`;
 
   function render(g) {
     const i = GEWERKE.indexOf(g);
-    const prev = GEWERKE[(i + GEWERKE.length - 1) % GEWERKE.length];
-    const next = GEWERKE[(i + 1) % GEWERKE.length];
-    content.innerHTML = `
-      <div class="gw-head gw-part">
-        <div class="kicker">Gewerk ${i + 1} von ${GEWERKE.length}</div>
-        <h2 id="gw-title">${esc(g.name)}</h2>
-        <p>${esc(g.lead)}</p>
-      </div>
-      <div class="gw-grid">
-        <div class="gw-box gw-part"><h3>Typische Tätigkeiten</h3>${list(g.tasks)}</div>
-        <div class="gw-box gw-part"><h3>Anforderungen</h3>${list(g.req)}</div>
-        <div class="gw-box gw-part gw-lang"><h3>Sprachniveau Deutsch</h3><div class="gw-level">${esc(g.lang)}</div><p>${esc(g.langText)}</p></div>
-        <div class="gw-box gw-part"><h3>Nachweise, die Bewerber mitbringen sollten</h3>${list(g.proof)}</div>
-      </div>
-      ${g.note ? `<p class="gw-note gw-part">${esc(g.note)}</p>` : ""}
-      <div class="gw-eu gw-part">
-        <h3>EU-Freizügigkeit</h3>
-        <p>Unsere Bewerber kommen aus EU-Mitgliedstaaten. Sie dürfen in Deutschland ohne Visum und ohne Arbeitserlaubnis arbeiten. Nötig sind ein gültiger Personalausweis oder Reisepass, die Anmeldung am Wohnort in Deutschland, eine Steuer-ID und eine Krankenversicherung – die Sozialversicherung läuft über den Arbeitgeber.</p>
-      </div>
-      <div class="gw-actions gw-part">
-        <button type="button" class="btn btn-green" data-gw-request>Personal für ${esc(g.name)} anfragen</button>
-        <div class="gw-nav">
-          <button type="button" class="btn btn-ghost" data-gw-go="-1">← ${esc(prev.name)}</button>
-          <button type="button" class="btn btn-ghost" data-gw-go="1">${esc(next.name)} →</button>
-        </div>
-      </div>
-      <p class="gw-small gw-part">Allgemeine Orientierung. Die genauen Anforderungen legt der jeweilige Arbeitgeber fest; bei reglementierten Berufen entscheidet die zuständige Stelle.</p>`;
-    content.querySelectorAll(".gw-part").forEach((el, n) => {
-      el.style.setProperty("--d", `${n * 0.07}s`);
-      el.style.setProperty("--side", n % 2 ? "1" : "-1");
-    });
+    const next = GEWERKE[(i + 1) % N], prev = GEWERKE[(i + N - 1) % N];
+    const ch = (num, label, title, body) => `
+      <section class="gw-chapter" data-label="${label}"><div class="container">
+        <div class="gw-num" data-a style="--k:0">${num}</div>
+        <h3 data-a style="--k:1;--s:1">${title}</h3>${body}
+      </div></section>`;
+    story.innerHTML = `
+      <header class="gw-chapter gw-intro" data-label="${esc(g.name)}"><div class="container">
+        <div class="gw-kick">Gewerk ${i + 1} von ${N}</div>
+        <h2 class="gw-title" id="gw-title">${letters(g.name)}</h2>
+        <p class="gw-lead">${esc(g.lead)}</p>
+        <div class="gw-hint">Scrollen ↓</div>
+      </div></header>
+      ${ch("01", "Tätigkeiten", "Was die Fachkräfte bei Ihnen tun", lines(g.tasks))}
+      ${ch("02", "Anforderungen", "Was sie mitbringen", lines(g.req) + (g.note ? lines([g.note], "warn") : ""))}
+      ${ch("03", "Deutsch", "Sprachniveau Deutsch", `<div class="gw-level" data-a style="--k:2">${esc(g.lang)}</div><p class="gw-text" data-a style="--k:3;--s:1">${esc(g.langText)}</p>`)}
+      ${ch("04", "Nachweise", "Nachweise, die Bewerber mitbringen sollten", lines(g.proof))}
+      ${ch("05", "EU", "EU-Freizügigkeit", `<div class="gw-big" data-a style="--k:2">Ohne Visum.<br><em>Ohne Arbeitserlaubnis.</em></div><p class="gw-text" data-a style="--k:3;--s:1">Unsere Bewerber kommen aus EU-Mitgliedstaaten und dürfen in Deutschland sofort arbeiten. Nötig sind ein gültiger Ausweis oder Reisepass, die Anmeldung am Wohnort, eine Steuer-ID und eine Krankenversicherung – die Sozialversicherung läuft über den Arbeitgeber.</p>`)}
+      <section class="gw-chapter gw-end" data-label="Anfragen"><div class="container">
+        <div class="gw-big" data-a style="--k:0">Passt das zu Ihrem Bedarf?</div>
+        <div data-a style="--k:1;--s:1"><button type="button" class="btn btn-green" data-gw-request>Personal für ${esc(g.name)} anfragen</button></div>
+        <button type="button" class="gw-next" data-gw-go="1" data-a style="--k:2"><span><small>Nächstes Gewerk</small><strong>${esc(next.name)}</strong></span><span class="arrow">→</span></button>
+        <button type="button" class="gw-prev" data-gw-go="-1" data-a style="--k:3">← ${esc(prev.name)}</button>
+        <p class="gw-small" data-a style="--k:4">Allgemeine Orientierung. Die genauen Anforderungen legt der jeweilige Arbeitgeber fest; bei reglementierten Berufen entscheidet die zuständige Stelle.</p>
+      </div></section>`;
+    const chapters = [...story.querySelectorAll(".gw-chapter")];
+    dots.innerHTML = chapters.map((c, n) => `<button type="button" aria-label="${c.dataset.label}" data-dot="${n}"></button>`).join("");
+    io?.disconnect();
+    io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("seen");
+        const n = chapters.indexOf(e.target);
+        dots.querySelectorAll("button").forEach((d, k) => d.classList.toggle("on", k === n));
+      });
+    }, { root: scroller, threshold: 0.35 });
+    chapters.forEach((c) => io.observe(c));
   }
 
-  // Ablauf: Bild fliegt herein → hält kurz → fliegt nach hinten weg und wird Hintergrund → Texte drehen sich herein
-  function show(i, dir = 1) {
-    clear();
-    index = (i + GEWERKE.length) % GEWERKE.length;
+  // Bild zoomt beim Scrollen hinein und wieder heraus und wandert leicht
+  const still = calm();
+  scroller.addEventListener("scroll", () => requestAnimationFrame(() => {
+    const max = scroller.scrollHeight - scroller.clientHeight;
+    const p = max > 0 ? scroller.scrollTop / max : 0;
+    bar.style.transform = `scaleX(${p})`;
+    if (still) return;
+    bgImg.style.setProperty("--z", (1.08 + 0.3 * Math.sin(p * Math.PI)).toFixed(3));
+    bgImg.style.setProperty("--px", `${(-3 * Math.sin(p * Math.PI * 2)).toFixed(2)}%`);
+    bgImg.style.setProperty("--py", `${(-4 * p).toFixed(2)}%`);
+  }), { passive: true });
+
+  function show(i) {
+    timers.forEach(clearTimeout); timers = [];
+    index = (i + N) % N;
     const g = GEWERKE[index];
     history.replaceState(null, "", `#gewerk-${g.id}`);
-    modal.classList.remove("gw-text");
-    content.classList.add("gw-out");
-    const run = () => {
+    const start = () => {
       render(g);
+      scroller.style.scrollBehavior = "auto";
       scroller.scrollTop = 0;
-      flyImg.src = img(g);
-      modal.style.setProperty("--dir", dir);
-      if (calm()) {
-        bg.style.backgroundImage = `url("${img(g)}")`;
-        bg.classList.add("on");
-        content.classList.remove("gw-out");
-        modal.classList.add("gw-text");
-        return;
-      }
-      fly.className = "gw-fly";
-      void fly.offsetWidth;
-      fly.classList.add("in");
-      later(() => fly.classList.add("back"), 1300);
-      later(() => { bg.style.backgroundImage = `url("${img(g)}")`; bg.classList.add("on"); }, 1350);
-      later(() => { content.classList.remove("gw-out"); modal.classList.add("gw-text"); }, 1650);
+      scroller.style.scrollBehavior = "";
+      bgImg.classList.remove("leave");
+      bgImg.style.setProperty("--z", "1.08");
+      bgImg.style.setProperty("--px", "0");
+      bgImg.style.setProperty("--py", "0");
+      bgImg.style.backgroundImage = `url("${img(g)}")`;
+      bgImg.classList.remove("enter");
+      void bgImg.offsetWidth;
+      bgImg.classList.add("enter");
+      story.classList.remove("out");
+      modal.classList.remove("gw-ready");
+      later(() => modal.classList.add("gw-ready"), 30);
     };
-    if (modal.hidden) run(); else later(run, 350);
+    if (modal.classList.contains("open") && !still) {
+      // Zoom-Durchflug: altes Bild rast heran und verschwindet, neues zoomt heraus
+      story.classList.add("out");
+      bgImg.classList.remove("enter");
+      bgImg.classList.add("leave");
+      later(start, 600);
+    } else start();
   }
 
   function open(i, el) {
     opener = el || null;
     modal.hidden = false;
     document.documentElement.classList.add("gw-lock");
-    requestAnimationFrame(() => modal.classList.add("open"));
-    bg.classList.remove("on");
     show(i);
+    requestAnimationFrame(() => modal.classList.add("open"));
     modal.querySelector(".gw-close").focus({ preventScroll: true });
   }
 
   function close() {
-    clear();
-    modal.classList.remove("open", "gw-text");
+    timers.forEach(clearTimeout); timers = [];
+    modal.classList.remove("open", "gw-ready");
     document.documentElement.classList.remove("gw-lock");
     history.replaceState(null, "", location.pathname + location.search);
-    setTimeout(() => { modal.hidden = true; fly.className = "gw-fly"; }, 350);
+    setTimeout(() => { modal.hidden = true; }, 400);
     opener?.focus({ preventScroll: true });
   }
 
-  cards.forEach((card) => {
-    const i = GEWERKE.findIndex((g) => g.id === card.dataset.gewerk);
-    card.addEventListener("click", () => open(i, card));
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i, card); }
-    });
+  triggers.forEach((t) => {
+    const i = GEWERKE.findIndex((g) => g.id === t.dataset.gewerk);
+    t.addEventListener("click", () => open(i, t));
   });
   modal.querySelector(".gw-close").addEventListener("click", close);
   modal.addEventListener("click", (e) => {
     const go = e.target.closest("[data-gw-go]");
-    if (go) show(index + Number(go.dataset.gwGo), Number(go.dataset.gwGo));
+    if (go) show(index + Number(go.dataset.gwGo));
+    const dot = e.target.closest("[data-dot]");
+    if (dot) story.querySelectorAll(".gw-chapter")[Number(dot.dataset.dot)].scrollIntoView({ behavior: still ? "auto" : "smooth" });
     if (e.target.closest("[data-gw-request]")) {
       const sel = document.getElementById("e-sector");
       if (sel) sel.value = GEWERKE[index].name;
       close();
-      document.getElementById("kontakt")?.scrollIntoView({ behavior: calm() ? "auto" : "smooth" });
+      document.getElementById("kontakt")?.scrollIntoView({ behavior: still ? "auto" : "smooth" });
     }
   });
   addEventListener("keydown", (e) => {
     if (modal.hidden) return;
     if (e.key === "Escape") close();
-    if (e.key === "ArrowRight") show(index + 1, 1);
-    if (e.key === "ArrowLeft") show(index - 1, -1);
+    if (e.key === "ArrowRight") show(index + 1);
+    if (e.key === "ArrowLeft") show(index - 1);
   });
   const fromHash = GEWERKE.findIndex((g) => location.hash === `#gewerk-${g.id}`);
   if (fromHash >= 0) open(fromHash);
@@ -735,5 +776,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeaderAndProgress();
   initRotator();
   initHeroScreens();
+  initTrades();
   initGewerke();
 });

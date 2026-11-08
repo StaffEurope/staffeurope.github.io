@@ -72,13 +72,9 @@
     </section>
 
     <!-- ================= TRUST ================= -->
-    <div class="trust">
-      <div class="container">
-        <div class="trust-item"><strong>Zahlung erst bei Ankunft</strong><span>Sie zahlen erst, wenn die Fachkraft wirklich bei Ihnen vor Ort ist.</span></div>
-        <div class="trust-item"><strong>Immer erreichbar</strong><span>Ein fester Ansprechpartner, der sich schnell und persönlich meldet.</span></div>
-        <div class="trust-item"><strong>Geprüfte Partneragenturen</strong><span>Vorauswahl direkt in den Herkunftsländern.</span></div>
-        <div class="trust-item"><strong>Vollständige Unterlagen</strong><span>Alle Dokumente der Bewerber gesammelt für Sie.</span></div>
-      </div>
+    <div class="trust marquee" aria-label="Unsere Versprechen">
+      <ul class="sr-only"><li>Zahlung erst bei Ankunft</li><li>Immer erreichbar</li><li>Geprüfte Partneragenturen</li><li>Vollständige Unterlagen</li><li>Fester Ansprechpartner</li><li>EU-Fachkräfte ohne Visum</li></ul>
+      <div class="mq-track" aria-hidden="true"><div class="mq-row"><span class="mq-item">Zahlung erst bei Ankunft</span><span class="mq-item">Immer erreichbar</span><span class="mq-item">Geprüfte Partneragenturen</span><span class="mq-item">Vollständige Unterlagen</span><span class="mq-item">Fester Ansprechpartner</span><span class="mq-item">EU-Fachkräfte ohne Visum</span></div><div class="mq-row"><span class="mq-item">Zahlung erst bei Ankunft</span><span class="mq-item">Immer erreichbar</span><span class="mq-item">Geprüfte Partneragenturen</span><span class="mq-item">Vollständige Unterlagen</span><span class="mq-item">Fester Ansprechpartner</span><span class="mq-item">EU-Fachkräfte ohne Visum</span></div></div>
     </div>
 
     <!-- ================= SO ARBEITEN WIR (Modelle + Ablauf) ================= -->
@@ -115,72 +111,87 @@
         <div class="section-head">
           <div class="kicker">Branchen</div>
           <h2>Personal für Bereiche, in denen Hände fehlen.</h2>
-          <p>Von Helfern bis zu ausgebildeten Fachkräften – wir vermitteln dort, wo der Bedarf in Deutschland am größten ist.</p>
+          <p>Von Helfern bis zu ausgebildeten Fachkräften – wählen Sie ein Gewerk und sehen Sie, was die Bewerber mitbringen.</p>
         </div>
-        <div class="sectors">
-          <div class="sector" data-gewerk="bau" role="button" tabindex="0" aria-label="Details zu diesem Gewerk ansehen">
-            <img class="sector-img" src="assets/img/branchen/bau.webp" alt="Maurer beim Mauern einer Ziegelwand" width="800" height="520" loading="lazy">
-            <div class="sector-body">
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h20"/><path d="M4 18v-3a8 8 0 0 1 16 0v3"/><path d="M10 7V5h4v2"/></svg></div>
-              <h3>Bau &amp; Handwerk</h3><p>Maurer, Trockenbauer, Elektriker, Helfer</p>
-              <span class="sector-more">Anforderungen ansehen →</span>
+        <div class="trades">
+          <ol class="trade-list">
+          <li>
+            <button type="button" class="trade" data-gewerk="bau" data-i="0">
+              <span class="trade-no">01</span>
+              <span class="trade-text"><span class="trade-name">Bau &amp; Handwerk</span><span class="trade-sub">Maurer, Trockenbauer, Elektriker, Helfer</span></span>
+              <span class="trade-go" aria-hidden="true">→</span>
+              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/bau.webp" alt="" width="800" height="520" loading="lazy"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="trade" data-gewerk="logistik" data-i="1">
+              <span class="trade-no">02</span>
+              <span class="trade-text"><span class="trade-name">Logistik &amp; Lager</span><span class="trade-sub">Lagerhelfer, Kommissionierer, Staplerfahrer</span></span>
+              <span class="trade-go" aria-hidden="true">→</span>
+              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/logistik.webp" alt="" width="800" height="520" loading="lazy"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="trade" data-gewerk="produktion" data-i="2">
+              <span class="trade-no">03</span>
+              <span class="trade-text"><span class="trade-name">Produktion &amp; Industrie</span><span class="trade-sub">Produktionshelfer, Maschinenbediener, Schweißer</span></span>
+              <span class="trade-go" aria-hidden="true">→</span>
+              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/produktion.webp" alt="" width="800" height="520" loading="lazy"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="trade" data-gewerk="transport" data-i="3">
+              <span class="trade-no">04</span>
+              <span class="trade-text"><span class="trade-name">Transport</span><span class="trade-sub">Berufskraftfahrer (C/CE), Auslieferungsfahrer</span></span>
+              <span class="trade-go" aria-hidden="true">→</span>
+              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/transport.webp" alt="" width="800" height="520" loading="lazy"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="trade" data-gewerk="pflege" data-i="4">
+              <span class="trade-no">05</span>
+              <span class="trade-text"><span class="trade-name">Pflege &amp; Betreuung</span><span class="trade-sub">Pflegehilfskräfte, Pflegefachkräfte mit Anerkennung</span></span>
+              <span class="trade-go" aria-hidden="true">→</span>
+              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/pflege.webp" alt="" width="800" height="520" loading="lazy"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="trade" data-gewerk="gastro" data-i="5">
+              <span class="trade-no">06</span>
+              <span class="trade-text"><span class="trade-name">Gastronomie &amp; Hotel</span><span class="trade-sub">Köche, Küchenhilfen, Housekeeping, Service</span></span>
+              <span class="trade-go" aria-hidden="true">→</span>
+              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/gastro.webp" alt="" width="800" height="520" loading="lazy"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="trade" data-gewerk="landwirtschaft" data-i="6">
+              <span class="trade-no">07</span>
+              <span class="trade-text"><span class="trade-name">Landwirtschaft</span><span class="trade-sub">Erntehelfer, Saisonkräfte, Tierpflege</span></span>
+              <span class="trade-go" aria-hidden="true">→</span>
+              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/landwirtschaft.webp" alt="" width="800" height="520" loading="lazy"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="trade" data-gewerk="reinigung" data-i="7">
+              <span class="trade-no">08</span>
+              <span class="trade-text"><span class="trade-name">Reinigung &amp; Facility</span><span class="trade-sub">Gebäudereinigung, Hausmeisterdienste</span></span>
+              <span class="trade-go" aria-hidden="true">→</span>
+              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/reinigung.webp" alt="" width="800" height="520" loading="lazy"></span>
+            </button>
+          </li>
+          </ol>
+          <div class="trade-stage">
+            <div class="trade-frame">
+            <img src="assets/img/branchen/bau.webp" alt="Maurer beim Mauern einer Ziegelwand" width="800" height="520" loading="lazy" class="on">
+            <img src="assets/img/branchen/logistik.webp" alt="Lagerarbeiter zwischen Hochregalen" width="800" height="520" loading="lazy">
+            <img src="assets/img/branchen/produktion.webp" alt="Schweißer bei der Arbeit in einer Werkhalle" width="800" height="520" loading="lazy">
+            <img src="assets/img/branchen/transport.webp" alt="LKW auf der Autobahn" width="800" height="520" loading="lazy">
+            <img src="assets/img/branchen/pflege.webp" alt="Pflegekraft im Gespräch mit einer älteren Dame" width="800" height="520" loading="lazy">
+            <img src="assets/img/branchen/gastro.webp" alt="Koch in einer Restaurantküche" width="800" height="520" loading="lazy">
+            <img src="assets/img/branchen/landwirtschaft.webp" alt="Mähdrescher und Traktor bei der Ernte" width="800" height="520" loading="lazy">
+            <img src="assets/img/branchen/reinigung.webp" alt="Fassadenreiniger an einem Bürogebäude" width="800" height="520" loading="lazy">
             </div>
-          </div>
-          <div class="sector" data-gewerk="logistik" role="button" tabindex="0" aria-label="Details zu diesem Gewerk ansehen">
-            <img class="sector-img" src="assets/img/branchen/logistik.webp" alt="Lagerarbeiter zwischen Hochregalen" width="800" height="520" loading="lazy">
-            <div class="sector-body">
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></div>
-              <h3>Logistik &amp; Lager</h3><p>Lagerhelfer, Kommissionierer, Staplerfahrer</p>
-              <span class="sector-more">Anforderungen ansehen →</span>
-            </div>
-          </div>
-          <div class="sector" data-gewerk="produktion" role="button" tabindex="0" aria-label="Details zu diesem Gewerk ansehen">
-            <img class="sector-img" src="assets/img/branchen/produktion.webp" alt="Schweißer bei der Arbeit in einer Werkhalle" width="800" height="520" loading="lazy">
-            <div class="sector-body">
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21h20"/><path d="M4 21V10l5 3v-3l5 3V6h6v15"/></svg></div>
-              <h3>Produktion &amp; Industrie</h3><p>Produktionshelfer, Maschinenbediener, Schweißer</p>
-              <span class="sector-more">Anforderungen ansehen →</span>
-            </div>
-          </div>
-          <div class="sector" data-gewerk="transport" role="button" tabindex="0" aria-label="Details zu diesem Gewerk ansehen">
-            <img class="sector-img" src="assets/img/branchen/transport.webp" alt="LKW auf der Autobahn" width="800" height="520" loading="lazy">
-            <div class="sector-body">
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1"/><path d="M14 9h4l4 4v4a1 1 0 0 1-1 1h-1"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M9 18h6"/></svg></div>
-              <h3>Transport</h3><p>Berufskraftfahrer (C/CE), Auslieferungsfahrer</p>
-              <span class="sector-more">Anforderungen ansehen →</span>
-            </div>
-          </div>
-          <div class="sector" data-gewerk="pflege" role="button" tabindex="0" aria-label="Details zu diesem Gewerk ansehen">
-            <img class="sector-img" src="assets/img/branchen/pflege.webp" alt="Pflegekraft im Gespräch mit einer älteren Dame" width="800" height="520" loading="lazy">
-            <div class="sector-body">
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
-              <h3>Pflege &amp; Betreuung</h3><p>Pflegehilfskräfte, Pflegefachkräfte mit Anerkennung</p>
-              <span class="sector-more">Anforderungen ansehen →</span>
-            </div>
-          </div>
-          <div class="sector" data-gewerk="gastro" role="button" tabindex="0" aria-label="Details zu diesem Gewerk ansehen">
-            <img class="sector-img" src="assets/img/branchen/gastro.webp" alt="Koch in einer Restaurantküche" width="800" height="520" loading="lazy">
-            <div class="sector-body">
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></div>
-              <h3>Gastronomie &amp; Hotel</h3><p>Köche, Küchenhilfen, Housekeeping, Service</p>
-              <span class="sector-more">Anforderungen ansehen →</span>
-            </div>
-          </div>
-          <div class="sector" data-gewerk="landwirtschaft" role="button" tabindex="0" aria-label="Details zu diesem Gewerk ansehen">
-            <img class="sector-img" src="assets/img/branchen/landwirtschaft.webp" alt="Mähdrescher und Traktor bei der Ernte" width="800" height="520" loading="lazy">
-            <div class="sector-body">
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12c0-4 3-7 8-7 0 5-3 7-8 7Z"/><path d="M12 14c0-3-2-5-7-5 0 4 2 5 7 5Z"/></svg></div>
-              <h3>Landwirtschaft</h3><p>Erntehelfer, Saisonkräfte, Tierpflege</p>
-              <span class="sector-more">Anforderungen ansehen →</span>
-            </div>
-          </div>
-          <div class="sector" data-gewerk="reinigung" role="button" tabindex="0" aria-label="Details zu diesem Gewerk ansehen">
-            <img class="sector-img" src="assets/img/branchen/reinigung.webp" alt="Fassadenreiniger an einem Bürogebäude" width="800" height="520" loading="lazy">
-            <div class="sector-body">
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 17v4"/><path d="M17 19h4"/></svg></div>
-              <h3>Reinigung &amp; Facility</h3><p>Gebäudereinigung, Hausmeisterdienste</p>
-              <span class="sector-more">Anforderungen ansehen →</span>
-            </div>
+            <p class="trade-caption">Klicken Sie auf ein Gewerk – Anforderungen, Sprachniveau und Nachweise im Überblick.</p>
           </div>
         </div>
       </div>
