@@ -433,18 +433,29 @@ function initScrollBg() {
       delete el.dataset.bg;
     }
   };
-  let current = -1;
+  const still = calm();
   let ticking = false;
+  // Bilder mischen fließend ineinander: zwei benachbarte Gewerke werden je nach Scrollposition überblendet
   const update = () => {
     ticking = false;
     const max = document.documentElement.scrollHeight - innerHeight;
-    const progress = max > 0 ? scrollY / max : 0;
-    const i = Math.min(layers.length - 1, Math.floor(progress * layers.length));
-    if (i === current) return;
+    const p = (max > 0 ? scrollY / max : 0) * (layers.length - 1);
+    const i = Math.min(layers.length - 1, Math.floor(p));
+    const f = still ? Math.round(p - i) : p - i;
     load(layers[i]);
-    load(layers[i + 1]); // nächstes Bild schon vorladen
-    layers.forEach((el, n) => el.classList.toggle("on", n === i));
-    current = i;
+    load(layers[i + 1]);
+    load(layers[i + 2]);
+    layers.forEach((el, n) => {
+      let o = 0;
+      if (n === i) o = 1;
+      else if (n === i + 1) o = f;
+      el.style.opacity = o;
+      if (!still && o > 0) {
+        const local = p - n; // -1 … 1 rund um dieses Bild
+        el.style.setProperty("--s", (1.14 - 0.06 * local).toFixed(4));
+        el.style.setProperty("--y", `${(-local * 60).toFixed(1)}px`);
+      }
+    });
   };
   addEventListener("scroll", () => {
     if (!ticking) {
@@ -454,6 +465,46 @@ function initScrollBg() {
   }, { passive: true });
   addEventListener("resize", update);
   update();
+}
+
+/* ---------- Bildschirme im Startbereich ---------- */
+
+function initHeroScreens() {
+  const wrap = document.querySelector(".hero-screens");
+  if (!wrap) return;
+  const screens = [...wrap.querySelectorAll(".screen")];
+  const imgs = ["bau", "logistik", "produktion", "transport", "pflege", "gastro", "landwirtschaft", "reinigung"].map((n) => `assets/img/branchen/${n}.webp`);
+  if (calm()) return;
+  // nach dem Einflug: Parallaxe beim Scrollen
+  setTimeout(() => screens.forEach((s) => s.classList.add("done")), 1900);
+  const speeds = [-0.18, -0.32, -0.1];
+  addEventListener("scroll", () => {
+    requestAnimationFrame(() => screens.forEach((s, k) => s.style.setProperty("--py", `${(scrollY * speeds[k]).toFixed(1)}px`)));
+  }, { passive: true });
+  // Bildschirme wechseln durch alle Gewerke
+  // zweites Bild je Bildschirm: das neue liegt darüber und wird eingeblendet, nie ein leerer Moment
+  screens.forEach((s) => {
+    const top = s.querySelector("img").cloneNode();
+    top.classList.add("screen-next");
+    s.appendChild(top);
+  });
+  let step = 0;
+  setInterval(() => {
+    const scr = screens[step % screens.length];
+    const [base, top] = scr.querySelectorAll("img");
+    const next = imgs[(step + 3) % imgs.length];
+    const pre = new Image();
+    pre.onload = () => {
+      top.src = next;
+      top.classList.add("show");
+      setTimeout(() => {
+        base.src = next;
+        top.classList.remove("show");
+      }, 700);
+    };
+    pre.src = next;
+    step++;
+  }, 2200);
 }
 
 /* ---------- Dynamik: Einblenden, Kopfzeile, Fortschritt, Wortwechsel ---------- */
@@ -475,11 +526,15 @@ function initReveal() {
   }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
   els.forEach((el) => {
     el.classList.add("reveal");
-    // Leiste unter dem Startbereich: abwechselnd von links und rechts einfliegen
-    if (el.matches(".trust-item")) {
+    // Karten drehen sich abwechselnd von links und rechts in den Bildschirm
+    if (el.matches(".trust-item, .model, .about-panel, .contact-info, .form-card, .benefit, .country-group, .employer-box, .about-points li")) {
       const i = [...el.parentElement.children].indexOf(el);
-      el.classList.add("reveal-x");
-      el.style.setProperty("--rx", i % 2 ? "70px" : "-70px");
+      const right = el.matches(".form-card, .about-panel") || (!el.matches(".contact-info") && i % 2 === 1);
+      const small = innerWidth < 600;
+      el.classList.add("reveal-3d");
+      el.style.setProperty("--rx", `${right ? "" : "-"}${small ? 50 : 140}px`);
+      el.style.setProperty("--rr", `${right ? "-" : ""}${small ? 35 : 50}deg`);
+      el.style.setProperty("--ro", right ? "right" : "left");
     }
     io.observe(el);
   });
@@ -536,4 +591,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initHeaderAndProgress();
   initRotator();
+  initHeroScreens();
 });
