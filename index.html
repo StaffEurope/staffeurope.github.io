@@ -12,14 +12,8 @@
 </head>
 <body>
   <div class="scroll-bg" aria-hidden="true">
-    <div class="scroll-bg-img" data-bg="assets/img/branchen/bau.webp"></div>
-    <div class="scroll-bg-img" data-bg="assets/img/branchen/logistik.webp"></div>
-    <div class="scroll-bg-img" data-bg="assets/img/branchen/produktion.webp"></div>
-    <div class="scroll-bg-img" data-bg="assets/img/branchen/transport.webp"></div>
-    <div class="scroll-bg-img" data-bg="assets/img/branchen/pflege.webp"></div>
-    <div class="scroll-bg-img" data-bg="assets/img/branchen/gastro.webp"></div>
-    <div class="scroll-bg-img" data-bg="assets/img/branchen/landwirtschaft.webp"></div>
-    <div class="scroll-bg-img" data-bg="assets/img/branchen/reinigung.webp"></div>
+    <video class="scroll-video" muted playsinline preload="auto" poster="assets/video/reise-quer.jpg"
+      data-quer="assets/video/reise-quer.mp4" data-hoch="assets/video/reise-hoch.mp4" data-poster-hoch="assets/video/reise-hoch.jpg"></video>
     <div class="scroll-bg-light"></div>
   </div>
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -113,86 +107,95 @@
           <h2>Personal für Bereiche, in denen Hände fehlen.</h2>
           <p>Von Helfern bis zu ausgebildeten Fachkräften – wählen Sie ein Gewerk und sehen Sie, was die Bewerber mitbringen.</p>
         </div>
-        <div class="trades">
-          <ol class="trade-list">
-          <li>
-            <button type="button" class="trade" data-gewerk="bau" data-i="0">
-              <span class="trade-no">01</span>
-              <span class="trade-text"><span class="trade-name">Bau &amp; Handwerk</span><span class="trade-sub">Maurer, Trockenbauer, Elektriker, Helfer</span></span>
-              <span class="trade-go" aria-hidden="true">→</span>
-              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/bau.webp" alt="" width="800" height="520" loading="lazy"></span>
+        <div class="showcase">
+          <article class="show-item show-left">
+            <button type="button" class="show-card" data-gewerk="bau">
+              <span class="show-img"><img src="assets/img/branchen/bau.webp" alt="Maurer beim Mauern einer Ziegelwand" width="800" height="520" loading="lazy"></span>
+              <span class="show-text">
+                <span class="show-no">01</span>
+                <span class="show-name">Bau &amp; Handwerk</span>
+                <span class="show-sub">Maurer, Trockenbauer, Elektriker, Helfer</span>
+                <span class="show-more">Anforderungen ansehen →</span>
+              </span>
             </button>
-          </li>
-          <li>
-            <button type="button" class="trade" data-gewerk="logistik" data-i="1">
-              <span class="trade-no">02</span>
-              <span class="trade-text"><span class="trade-name">Logistik &amp; Lager</span><span class="trade-sub">Lagerhelfer, Kommissionierer, Staplerfahrer</span></span>
-              <span class="trade-go" aria-hidden="true">→</span>
-              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/logistik.webp" alt="" width="800" height="520" loading="lazy"></span>
+          </article>
+          <article class="show-item show-right">
+            <button type="button" class="show-card" data-gewerk="logistik">
+              <span class="show-img"><img src="assets/img/branchen/logistik.webp" alt="Lagerarbeiter zwischen Hochregalen" width="800" height="520" loading="lazy"></span>
+              <span class="show-text">
+                <span class="show-no">02</span>
+                <span class="show-name">Logistik &amp; Lager</span>
+                <span class="show-sub">Lagerhelfer, Kommissionierer, Staplerfahrer</span>
+                <span class="show-more">Anforderungen ansehen →</span>
+              </span>
             </button>
-          </li>
-          <li>
-            <button type="button" class="trade" data-gewerk="produktion" data-i="2">
-              <span class="trade-no">03</span>
-              <span class="trade-text"><span class="trade-name">Produktion &amp; Industrie</span><span class="trade-sub">Produktionshelfer, Maschinenbediener, Schweißer</span></span>
-              <span class="trade-go" aria-hidden="true">→</span>
-              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/produktion.webp" alt="" width="800" height="520" loading="lazy"></span>
+          </article>
+          <article class="show-item show-left">
+            <button type="button" class="show-card" data-gewerk="produktion">
+              <span class="show-img"><img src="assets/img/branchen/produktion.webp" alt="Schweißer bei der Arbeit in einer Werkhalle" width="800" height="520" loading="lazy"></span>
+              <span class="show-text">
+                <span class="show-no">03</span>
+                <span class="show-name">Produktion &amp; Industrie</span>
+                <span class="show-sub">Produktionshelfer, Maschinenbediener, Schweißer</span>
+                <span class="show-more">Anforderungen ansehen →</span>
+              </span>
             </button>
-          </li>
-          <li>
-            <button type="button" class="trade" data-gewerk="transport" data-i="3">
-              <span class="trade-no">04</span>
-              <span class="trade-text"><span class="trade-name">Transport</span><span class="trade-sub">Berufskraftfahrer (C/CE), Auslieferungsfahrer</span></span>
-              <span class="trade-go" aria-hidden="true">→</span>
-              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/transport.webp" alt="" width="800" height="520" loading="lazy"></span>
+          </article>
+          <article class="show-item show-right">
+            <button type="button" class="show-card" data-gewerk="transport">
+              <span class="show-img"><img src="assets/img/branchen/transport.webp" alt="LKW auf der Autobahn" width="800" height="520" loading="lazy"></span>
+              <span class="show-text">
+                <span class="show-no">04</span>
+                <span class="show-name">Transport</span>
+                <span class="show-sub">Berufskraftfahrer (C/CE), Auslieferungsfahrer</span>
+                <span class="show-more">Anforderungen ansehen →</span>
+              </span>
             </button>
-          </li>
-          <li>
-            <button type="button" class="trade" data-gewerk="pflege" data-i="4">
-              <span class="trade-no">05</span>
-              <span class="trade-text"><span class="trade-name">Pflege &amp; Betreuung</span><span class="trade-sub">Pflegehilfskräfte, Pflegefachkräfte mit Anerkennung</span></span>
-              <span class="trade-go" aria-hidden="true">→</span>
-              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/pflege.webp" alt="" width="800" height="520" loading="lazy"></span>
+          </article>
+          <article class="show-item show-left">
+            <button type="button" class="show-card" data-gewerk="pflege">
+              <span class="show-img"><img src="assets/img/branchen/pflege.webp" alt="Pflegekraft im Gespräch mit einer älteren Dame" width="800" height="520" loading="lazy"></span>
+              <span class="show-text">
+                <span class="show-no">05</span>
+                <span class="show-name">Pflege &amp; Betreuung</span>
+                <span class="show-sub">Pflegehilfskräfte, Pflegefachkräfte mit Anerkennung</span>
+                <span class="show-more">Anforderungen ansehen →</span>
+              </span>
             </button>
-          </li>
-          <li>
-            <button type="button" class="trade" data-gewerk="gastro" data-i="5">
-              <span class="trade-no">06</span>
-              <span class="trade-text"><span class="trade-name">Gastronomie &amp; Hotel</span><span class="trade-sub">Köche, Küchenhilfen, Housekeeping, Service</span></span>
-              <span class="trade-go" aria-hidden="true">→</span>
-              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/gastro.webp" alt="" width="800" height="520" loading="lazy"></span>
+          </article>
+          <article class="show-item show-right">
+            <button type="button" class="show-card" data-gewerk="gastro">
+              <span class="show-img"><img src="assets/img/branchen/gastro.webp" alt="Koch in einer Restaurantküche" width="800" height="520" loading="lazy"></span>
+              <span class="show-text">
+                <span class="show-no">06</span>
+                <span class="show-name">Gastronomie &amp; Hotel</span>
+                <span class="show-sub">Köche, Küchenhilfen, Housekeeping, Service</span>
+                <span class="show-more">Anforderungen ansehen →</span>
+              </span>
             </button>
-          </li>
-          <li>
-            <button type="button" class="trade" data-gewerk="landwirtschaft" data-i="6">
-              <span class="trade-no">07</span>
-              <span class="trade-text"><span class="trade-name">Landwirtschaft</span><span class="trade-sub">Erntehelfer, Saisonkräfte, Tierpflege</span></span>
-              <span class="trade-go" aria-hidden="true">→</span>
-              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/landwirtschaft.webp" alt="" width="800" height="520" loading="lazy"></span>
+          </article>
+          <article class="show-item show-left">
+            <button type="button" class="show-card" data-gewerk="landwirtschaft">
+              <span class="show-img"><img src="assets/img/branchen/landwirtschaft.webp" alt="Mähdrescher und Traktor bei der Ernte" width="800" height="520" loading="lazy"></span>
+              <span class="show-text">
+                <span class="show-no">07</span>
+                <span class="show-name">Landwirtschaft</span>
+                <span class="show-sub">Erntehelfer, Saisonkräfte, Tierpflege</span>
+                <span class="show-more">Anforderungen ansehen →</span>
+              </span>
             </button>
-          </li>
-          <li>
-            <button type="button" class="trade" data-gewerk="reinigung" data-i="7">
-              <span class="trade-no">08</span>
-              <span class="trade-text"><span class="trade-name">Reinigung &amp; Facility</span><span class="trade-sub">Gebäudereinigung, Hausmeisterdienste</span></span>
-              <span class="trade-go" aria-hidden="true">→</span>
-              <span class="trade-thumb" aria-hidden="true"><img src="assets/img/branchen/reinigung.webp" alt="" width="800" height="520" loading="lazy"></span>
+          </article>
+          <article class="show-item show-right">
+            <button type="button" class="show-card" data-gewerk="reinigung">
+              <span class="show-img"><img src="assets/img/branchen/reinigung.webp" alt="Fassadenreiniger an einem Bürogebäude" width="800" height="520" loading="lazy"></span>
+              <span class="show-text">
+                <span class="show-no">08</span>
+                <span class="show-name">Reinigung &amp; Facility</span>
+                <span class="show-sub">Gebäudereinigung, Hausmeisterdienste</span>
+                <span class="show-more">Anforderungen ansehen →</span>
+              </span>
             </button>
-          </li>
-          </ol>
-          <div class="trade-stage">
-            <div class="trade-frame">
-            <img src="assets/img/branchen/bau.webp" alt="Maurer beim Mauern einer Ziegelwand" width="800" height="520" loading="lazy" class="on">
-            <img src="assets/img/branchen/logistik.webp" alt="Lagerarbeiter zwischen Hochregalen" width="800" height="520" loading="lazy">
-            <img src="assets/img/branchen/produktion.webp" alt="Schweißer bei der Arbeit in einer Werkhalle" width="800" height="520" loading="lazy">
-            <img src="assets/img/branchen/transport.webp" alt="LKW auf der Autobahn" width="800" height="520" loading="lazy">
-            <img src="assets/img/branchen/pflege.webp" alt="Pflegekraft im Gespräch mit einer älteren Dame" width="800" height="520" loading="lazy">
-            <img src="assets/img/branchen/gastro.webp" alt="Koch in einer Restaurantküche" width="800" height="520" loading="lazy">
-            <img src="assets/img/branchen/landwirtschaft.webp" alt="Mähdrescher und Traktor bei der Ernte" width="800" height="520" loading="lazy">
-            <img src="assets/img/branchen/reinigung.webp" alt="Fassadenreiniger an einem Bürogebäude" width="800" height="520" loading="lazy">
-            </div>
-            <p class="trade-caption">Klicken Sie auf ein Gewerk – Anforderungen, Sprachniveau und Nachweise im Überblick.</p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
@@ -390,6 +393,35 @@
         </div>
       </div>
     </section>
+    <!-- ================= RECHTLICHES ================= -->
+    <section class="section legal-end" id="rechtliches">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Rechtliches</div>
+          <h2>Impressum &amp; AGB</h2>
+        </div>
+        <div class="legal-grid">
+          <div class="legal-box">
+            <h3>Impressum</h3>
+            <p>Terravia Arbeitsvermittlung<br>Inhaber: Kaan Yagci<br>Schwedenstraße 27<br>72119 Ammerbuch-Altingen</p>
+            <p>E-Mail: <a data-cfg="email" href="#"></a></p>
+            <p>Private Arbeitsvermittlung. Arbeitnehmerüberlassung ausschließlich durch Partner mit Erlaubnis nach § 1 AÜG.</p>
+            <a class="legal-link" href="impressum.html">Vollständiges Impressum →</a>
+          </div>
+          <div class="legal-box">
+            <h3>AGB in Kürze</h3>
+            <ul>
+              <li>Der Arbeitsvertrag kommt direkt zwischen Ihnen und der Fachkraft zustande.</li>
+              <li>Das Honorar wird erst fällig, wenn die Fachkraft die Arbeit bei Ihnen aufgenommen hat.</li>
+              <li>Bewerber zahlen für die Vermittlung nichts.</li>
+              <li>Überlassung nur über zugelassene Partner, nicht im Bauhauptgewerbe.</li>
+            </ul>
+            <a class="legal-link" href="agb.html">Allgemeine Geschäftsbedingungen lesen →</a>
+            <a class="legal-link" href="datenschutz.html">Datenschutzerklärung →</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -420,6 +452,7 @@
           <h4>Rechtliches</h4>
           <a href="impressum.html">Impressum</a>
           <a href="datenschutz.html">Datenschutz</a>
+          <a href="agb.html">AGB</a>
         </div>
       </div>
       <div class="footer-bottom">

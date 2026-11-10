@@ -761,6 +761,75 @@ function initGewerke() {
   if (fromHash >= 0) open(fromHash);
 }
 
+/* ---------- Video läuft mit dem Scrollen: Seitenanfang = Videoanfang, Seitenende = Videoende ---------- */
+
+function initScrollVideo() {
+  const v = document.querySelector(".scroll-video");
+  if (!v) return;
+  document.body.classList.add("has-scroll-bg");
+  const tall = () => innerHeight > innerWidth;
+  let mode = null;
+  const pick = () => {
+    const m = tall() ? "hoch" : "quer";
+    if (m === mode) return;
+    mode = m;
+    v.poster = m === "hoch" ? v.dataset.posterHoch : v.getAttribute("poster");
+    v.src = v.dataset[m];
+    v.load();
+  };
+  pick();
+  if (calm()) return; // ruhige Version: nur das Standbild
+  let target = 0, current = 0, running = false;
+  const progress = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    return max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+  };
+  const tick = () => {
+    const d = v.duration;
+    if (!d || isNaN(d)) { running = false; return; }
+    target = progress() * (d - 0.05);
+    current += (target - current) * 0.18; // weich nachziehen
+    if (Math.abs(target - current) < 0.005) current = target;
+    if (Math.abs(v.currentTime - current) > 0.01) v.currentTime = current;
+    if (current !== target) requestAnimationFrame(tick);
+    else running = false;
+  };
+  const kick = () => {
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  };
+  addEventListener("scroll", kick, { passive: true });
+  addEventListener("resize", () => { pick(); kick(); });
+  v.addEventListener("loadedmetadata", kick);
+  // iPhone/iPad: Video einmal kurz „anstoßen“, damit Springen per currentTime funktioniert
+  const unlock = () => {
+    v.play().then(() => { v.pause(); kick(); }).catch(() => {});
+    removeEventListener("touchstart", unlock);
+  };
+  addEventListener("touchstart", unlock, { passive: true });
+}
+
+/* ---------- Gewerke links und rechts ---------- */
+
+function initShowcase() {
+  const items = [...document.querySelectorAll(".show-item")];
+  if (!items.length || calm() || !("IntersectionObserver" in window)) return;
+  document.body.classList.add("js-show");
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      const el = e.target;
+      if (e.isIntersecting) {
+        el.classList.add("in");
+        el.classList.remove("past");
+      } else if (e.boundingClientRect.top < 0) {
+        el.classList.add("past"); // nach oben weggescrollt: nach hinten weg
+      } else {
+        el.classList.remove("in", "past"); // wieder unten: erneut einfliegen
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "-5% 0px -5% 0px" });
+  items.forEach((el) => io.observe(el));
+}
+
 /* ---------- Start ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -778,4 +847,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroScreens();
   initTrades();
   initGewerke();
+  initScrollVideo();
+  initShowcase();
 });

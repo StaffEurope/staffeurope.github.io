@@ -777,3 +777,60 @@ body { overflow-wrap: break-word; hyphens: auto; }
   .mq-track, .trade-frame img.on { animation: none; }
 }
 
+/* ---------- Video im Hintergrund: läuft mit dem Scrollen ---------- */
+.scroll-video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(1.3) contrast(1.08) brightness(0.85);
+}
+
+/* ---------- Gewerke erscheinen abwechselnd links und rechts ---------- */
+.showcase { display: flex; flex-direction: column; gap: 14vh; padding: 6vh 0 4vh; perspective: 1400px; }
+.show-item { width: min(620px, 100%); }
+.show-right { align-self: flex-end; }
+.show-card {
+  display: block; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer;
+  border-radius: 22px; overflow: hidden; position: relative;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transform-style: preserve-3d;
+}
+.show-img { display: block; aspect-ratio: 16 / 10; overflow: hidden; }
+.show-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.3) contrast(1.06); transform: scale(1.12); transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.show-card:hover .show-img img { transform: scale(1.02); }
+.show-text {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 70px 26px 22px; display: block;
+  background: linear-gradient(0deg, rgba(3, 5, 4, 0.92), rgba(3, 5, 4, 0.55) 60%, transparent);
+}
+.show-no { display: block; font-weight: 900; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--green-bright); }
+.show-name { display: block; font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 850; letter-spacing: -0.025em; line-height: 1.05; color: var(--white); margin: 4px 0 6px; }
+.show-sub { display: block; color: var(--text-light); font-size: 0.95rem; }
+.show-more { display: inline-block; margin-top: 10px; color: var(--green-bright); font-weight: 700; font-size: 0.9rem; transition: transform 0.25s; }
+.show-card:hover .show-more { transform: translateX(6px); }
+.show-card:focus-visible { outline: 2px solid var(--green-bright); outline-offset: 4px; }
+/* Einflug: von der eigenen Seite herein drehen, beim Weiterscrollen nach hinten weg */
+.js-show .show-item { opacity: 0; transform: translate3d(var(--sx), 40px, -120px) rotateY(var(--sr)) scale(0.92); transition: opacity 0.8s ease, transform 1.1s cubic-bezier(0.16, 1, 0.3, 1); }
+.js-show .show-left { --sx: -18vw; --sr: 38deg; transform-origin: left center; }
+.js-show .show-right { --sx: 18vw; --sr: -38deg; transform-origin: right center; }
+.js-show .show-item.in { opacity: 1; transform: none; }
+.js-show .show-item.in .show-img img { transform: scale(1.02); }
+.js-show .show-item.past { opacity: 0.25; transform: translate3d(0, -30px, -260px) scale(0.86); }
+@media (max-width: 700px) {
+  .showcase { gap: 8vh; }
+  .js-show .show-left { --sx: -40px; --sr: 25deg; }
+  .js-show .show-right { --sx: 40px; --sr: -25deg; }
+  .show-text { padding: 50px 18px 16px; }
+}
+
+/* ---------- Abschluss: Impressum & AGB ---------- */
+.legal-end { padding-bottom: 70px; }
+.legal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.legal-box { background: rgba(11, 17, 14, 0.75); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--radius); padding: 26px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); min-width: 0; }
+.legal-box h3 { margin: 0 0 12px; color: var(--white); }
+.legal-box p, .legal-box li { color: var(--text-light); font-size: 0.95rem; }
+.legal-box ul { padding-left: 18px; margin: 0 0 12px; }
+.legal-link { display: block; margin-top: 8px; font-weight: 700; }
+@media (max-width: 700px) { .legal-grid { grid-template-columns: 1fr; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-show .show-item, .js-show .show-item.past { opacity: 1; transform: none; transition: none; }
+}
+
