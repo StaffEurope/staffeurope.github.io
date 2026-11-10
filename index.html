@@ -11,12 +11,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <div class="scroll-bg" aria-hidden="true">
-    <video class="scroll-video" muted playsinline preload="auto" poster="assets/video/reise-quer.jpg"
-      data-quer="assets/video/reise-quer.mp4" data-hoch="assets/video/reise-hoch.mp4" data-poster-hoch="assets/video/reise-hoch.jpg"></video>
-    <div class="scroll-bg-light"></div>
-  </div>
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <a class="skip-link" href="#faq">Zum Inhalt springen</a>
 
   <header class="site-header">
     <div class="container">
@@ -26,9 +21,8 @@
       </a>
       <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="Hauptnavigation">
-        <a href="#ablauf">So arbeiten wir</a>
-        <a href="#branchen">Branchen</a>
-        <a href="#ueber-uns">Über uns</a>
+        <a href="#start" data-jump="0.075">Gewerke</a>
+        <a href="#start" data-jump="0.64">Arbeitnehmerüberlassung</a>
         <a href="#faq">FAQ</a>
         <a href="bewerber.html">Für Bewerber</a>
         <a href="#kontakt" class="btn btn-green btn-small">Personal anfragen</a>
@@ -37,210 +31,91 @@
   </header>
 
   <main id="main">
-    <!-- ================= HERO ================= -->
-    <section class="hero">
-      <div class="hero-screens" aria-hidden="true">
-        <div class="screen s1"><img src="assets/img/branchen/bau.webp" alt="" width="800" height="520"></div>
-        <div class="screen s2"><img src="assets/img/branchen/landwirtschaft.webp" alt="" width="800" height="520"></div>
-        <div class="screen s3"><img src="assets/img/branchen/produktion.webp" alt="" width="800" height="520"></div>
-      </div>
-      <div class="container">
-        <div>
-          <span class="eyebrow">Personalvermittlung aus dem europäischen Ausland</span>
+    <!-- ================= REISE DURCH DIE BERGE (Video läuft mit dem Scrollen) ================= -->
+    <section class="journey" id="start" aria-label="Gewerke und Arbeitnehmerüberlassung">
+      <div class="journey-stage">
+        <video class="journey-video" muted playsinline preload="auto" poster="assets/video/reise-quer.jpg"
+          data-quer="assets/video/reise-quer.mp4" data-hoch="assets/video/reise-hoch.mp4" data-poster-hoch="assets/video/reise-hoch.jpg" aria-hidden="true"></video>
+        <div class="journey-shade" aria-hidden="true"></div>
+        <div class="journey-light" aria-hidden="true"></div>
+        <div class="journey-bar" aria-hidden="true"></div>
+        <div class="j-panel j-center j-intro" data-a="0" data-b="0.085" data-hold="1">
+          <span class="j-kick">Personalvermittlung aus dem europäischen Ausland</span>
           <h1>Zuverlässige Arbeitskräfte.<br><em>Schnell vermittelt.</em></h1>
-          <p class="hero-rotator" aria-hidden="true">Für <span class="rotator" data-words="Bau &amp; Handwerk|Logistik &amp; Lager|Produktion &amp; Industrie|Transport|Pflege &amp; Betreuung|Gastronomie &amp; Hotel|Landwirtschaft|Reinigung &amp; Facility">Bau &amp; Handwerk</span></p>
-          <p class="lead">Motivierte Fach- und Hilfskräfte aus dem EU-Ausland – ausgewählt über geprüfte Partneragenturen, mit vollständigen Unterlagen und pünktlich zum Start bei Ihnen.</p>
-          <div class="hero-actions">
-            <a href="#kontakt" class="btn btn-green">Personal anfragen</a>
-            <a href="#ablauf" class="btn btn-ghost">So arbeiten wir</a>
-          </div>
-          <p class="hero-langs">Sie suchen Arbeit?
-            <a href="bewerber.html?lang=ro">Română</a>
-            <a href="bewerber.html?lang=bg">Български</a>
-            <a href="bewerber.html?lang=hr">Hrvatski</a>
-            <a href="bewerber.html?lang=de">Deutsch</a>
-            · <a href="jobs.html">Offene Stellen</a>
-          </p>
+          <p class="j-scroll">Scrollen ↓</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= TRUST ================= -->
-    <div class="trust marquee" aria-label="Unsere Versprechen">
-      <ul class="sr-only"><li>Zahlung erst bei Ankunft</li><li>Immer erreichbar</li><li>Geprüfte Partneragenturen</li><li>Vollständige Unterlagen</li><li>Fester Ansprechpartner</li><li>EU-Fachkräfte ohne Visum</li></ul>
-      <div class="mq-track" aria-hidden="true"><div class="mq-row"><span class="mq-item">Zahlung erst bei Ankunft</span><span class="mq-item">Immer erreichbar</span><span class="mq-item">Geprüfte Partneragenturen</span><span class="mq-item">Vollständige Unterlagen</span><span class="mq-item">Fester Ansprechpartner</span><span class="mq-item">EU-Fachkräfte ohne Visum</span></div><div class="mq-row"><span class="mq-item">Zahlung erst bei Ankunft</span><span class="mq-item">Immer erreichbar</span><span class="mq-item">Geprüfte Partneragenturen</span><span class="mq-item">Vollständige Unterlagen</span><span class="mq-item">Fester Ansprechpartner</span><span class="mq-item">EU-Fachkräfte ohne Visum</span></div></div>
-    </div>
-
-    <!-- ================= SO ARBEITEN WIR (Modelle + Ablauf) ================= -->
-    <section class="section section-black" id="ablauf">
-      <span id="leistungen" class="anchor"></span>
-      <div class="container">
-        <div class="section-head">
-          <div class="kicker">So arbeiten wir</div>
-          <h2>In vier Schritten zu Ihrem neuen Personal.</h2>
+        <div class="j-panel j-left" data-a="0.07" data-b="0.17">
+          <button type="button" class="j-card" data-gewerk="bau">
+            <span class="j-img"><img src="assets/img/branchen/bau.webp" alt="" width="800" height="520"></span>
+            <span class="j-body"><span class="j-no">01 · Gewerk</span><span class="j-name">Bau &amp; Handwerk</span><span class="j-sub">Maurer, Trockenbauer, Elektriker, Helfer</span><span class="j-more">Anforderungen ansehen →</span></span>
+          </button>
         </div>
-        <ol class="steps-line">
-          <li><span class="num">1</span><strong>Anfrage</strong><span>Sie nennen Ihren Bedarf</span></li>
-          <li><span class="num">2</span><strong>Auswahl</strong><span>Wir finden passende Kandidaten</span></li>
-          <li><span class="num">3</span><strong>Kennenlernen</strong><span>Sie entscheiden selbst</span></li>
-          <li><span class="num">4</span><strong>Start</strong><span>Die Fachkraft ist bei Ihnen</span></li>
-        </ol>
-
-        <div class="models" id="modelle">
-          <div class="model">
-            <h3>Direktanstellung</h3>
-            <p>Sie stellen die Kraft direkt bei sich ein – ideal für dauerhaften Bedarf.</p>
-          </div>
-          <div class="model">
-            <h3>Arbeitnehmerüberlassung</h3>
-            <p>Über Partner mit Erlaubnis nach dem AÜG – ideal für Projekte und Saisonspitzen. Nicht im Bauhauptgewerbe.</p>
-          </div>
+        <div class="j-panel j-right" data-a="0.138" data-b="0.238">
+          <button type="button" class="j-card" data-gewerk="logistik">
+            <span class="j-img"><img src="assets/img/branchen/logistik.webp" alt="" width="800" height="520"></span>
+            <span class="j-body"><span class="j-no">02 · Gewerk</span><span class="j-name">Logistik &amp; Lager</span><span class="j-sub">Lagerhelfer, Kommissionierer, Staplerfahrer</span><span class="j-more">Anforderungen ansehen →</span></span>
+          </button>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= BRANCHEN ================= -->
-    <section class="section" id="branchen">
-      <div class="container">
-        <div class="section-head">
-          <div class="kicker">Branchen</div>
-          <h2>Personal für Bereiche, in denen Hände fehlen.</h2>
-          <p>Von Helfern bis zu ausgebildeten Fachkräften – wählen Sie ein Gewerk und sehen Sie, was die Bewerber mitbringen.</p>
+        <div class="j-panel j-left" data-a="0.206" data-b="0.306">
+          <button type="button" class="j-card" data-gewerk="produktion">
+            <span class="j-img"><img src="assets/img/branchen/produktion.webp" alt="" width="800" height="520"></span>
+            <span class="j-body"><span class="j-no">03 · Gewerk</span><span class="j-name">Produktion &amp; Industrie</span><span class="j-sub">Produktionshelfer, Maschinenbediener, Schweißer</span><span class="j-more">Anforderungen ansehen →</span></span>
+          </button>
         </div>
-        <div class="showcase">
-          <article class="show-item show-left">
-            <button type="button" class="show-card" data-gewerk="bau">
-              <span class="show-img"><img src="assets/img/branchen/bau.webp" alt="Maurer beim Mauern einer Ziegelwand" width="800" height="520" loading="lazy"></span>
-              <span class="show-text">
-                <span class="show-no">01</span>
-                <span class="show-name">Bau &amp; Handwerk</span>
-                <span class="show-sub">Maurer, Trockenbauer, Elektriker, Helfer</span>
-                <span class="show-more">Anforderungen ansehen →</span>
-              </span>
-            </button>
-          </article>
-          <article class="show-item show-right">
-            <button type="button" class="show-card" data-gewerk="logistik">
-              <span class="show-img"><img src="assets/img/branchen/logistik.webp" alt="Lagerarbeiter zwischen Hochregalen" width="800" height="520" loading="lazy"></span>
-              <span class="show-text">
-                <span class="show-no">02</span>
-                <span class="show-name">Logistik &amp; Lager</span>
-                <span class="show-sub">Lagerhelfer, Kommissionierer, Staplerfahrer</span>
-                <span class="show-more">Anforderungen ansehen →</span>
-              </span>
-            </button>
-          </article>
-          <article class="show-item show-left">
-            <button type="button" class="show-card" data-gewerk="produktion">
-              <span class="show-img"><img src="assets/img/branchen/produktion.webp" alt="Schweißer bei der Arbeit in einer Werkhalle" width="800" height="520" loading="lazy"></span>
-              <span class="show-text">
-                <span class="show-no">03</span>
-                <span class="show-name">Produktion &amp; Industrie</span>
-                <span class="show-sub">Produktionshelfer, Maschinenbediener, Schweißer</span>
-                <span class="show-more">Anforderungen ansehen →</span>
-              </span>
-            </button>
-          </article>
-          <article class="show-item show-right">
-            <button type="button" class="show-card" data-gewerk="transport">
-              <span class="show-img"><img src="assets/img/branchen/transport.webp" alt="LKW auf der Autobahn" width="800" height="520" loading="lazy"></span>
-              <span class="show-text">
-                <span class="show-no">04</span>
-                <span class="show-name">Transport</span>
-                <span class="show-sub">Berufskraftfahrer (C/CE), Auslieferungsfahrer</span>
-                <span class="show-more">Anforderungen ansehen →</span>
-              </span>
-            </button>
-          </article>
-          <article class="show-item show-left">
-            <button type="button" class="show-card" data-gewerk="pflege">
-              <span class="show-img"><img src="assets/img/branchen/pflege.webp" alt="Pflegekraft im Gespräch mit einer älteren Dame" width="800" height="520" loading="lazy"></span>
-              <span class="show-text">
-                <span class="show-no">05</span>
-                <span class="show-name">Pflege &amp; Betreuung</span>
-                <span class="show-sub">Pflegehilfskräfte, Pflegefachkräfte mit Anerkennung</span>
-                <span class="show-more">Anforderungen ansehen →</span>
-              </span>
-            </button>
-          </article>
-          <article class="show-item show-right">
-            <button type="button" class="show-card" data-gewerk="gastro">
-              <span class="show-img"><img src="assets/img/branchen/gastro.webp" alt="Koch in einer Restaurantküche" width="800" height="520" loading="lazy"></span>
-              <span class="show-text">
-                <span class="show-no">06</span>
-                <span class="show-name">Gastronomie &amp; Hotel</span>
-                <span class="show-sub">Köche, Küchenhilfen, Housekeeping, Service</span>
-                <span class="show-more">Anforderungen ansehen →</span>
-              </span>
-            </button>
-          </article>
-          <article class="show-item show-left">
-            <button type="button" class="show-card" data-gewerk="landwirtschaft">
-              <span class="show-img"><img src="assets/img/branchen/landwirtschaft.webp" alt="Mähdrescher und Traktor bei der Ernte" width="800" height="520" loading="lazy"></span>
-              <span class="show-text">
-                <span class="show-no">07</span>
-                <span class="show-name">Landwirtschaft</span>
-                <span class="show-sub">Erntehelfer, Saisonkräfte, Tierpflege</span>
-                <span class="show-more">Anforderungen ansehen →</span>
-              </span>
-            </button>
-          </article>
-          <article class="show-item show-right">
-            <button type="button" class="show-card" data-gewerk="reinigung">
-              <span class="show-img"><img src="assets/img/branchen/reinigung.webp" alt="Fassadenreiniger an einem Bürogebäude" width="800" height="520" loading="lazy"></span>
-              <span class="show-text">
-                <span class="show-no">08</span>
-                <span class="show-name">Reinigung &amp; Facility</span>
-                <span class="show-sub">Gebäudereinigung, Hausmeisterdienste</span>
-                <span class="show-more">Anforderungen ansehen →</span>
-              </span>
-            </button>
-          </article>
+        <div class="j-panel j-right" data-a="0.274" data-b="0.374">
+          <button type="button" class="j-card" data-gewerk="transport">
+            <span class="j-img"><img src="assets/img/branchen/transport.webp" alt="" width="800" height="520"></span>
+            <span class="j-body"><span class="j-no">04 · Gewerk</span><span class="j-name">Transport</span><span class="j-sub">Berufskraftfahrer (C/CE), Auslieferungsfahrer</span><span class="j-more">Anforderungen ansehen →</span></span>
+          </button>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= LÄNDER ================= -->
-    <section class="section section-black" id="laender">
-      <div class="container">
-        <div class="section-head">
-          <div class="kicker">Herkunft</div>
-          <h2>Arbeitskräfte aus der Europäischen Union.</h2>
-          <p>Wir vermitteln ausschließlich Bewerber aus EU-Mitgliedstaaten im Südosten Europas. Für sie gilt die volle Arbeitnehmerfreizügigkeit – ohne Visum und ohne Arbeitserlaubnis.</p>
+        <div class="j-panel j-left" data-a="0.342" data-b="0.442">
+          <button type="button" class="j-card" data-gewerk="pflege">
+            <span class="j-img"><img src="assets/img/branchen/pflege.webp" alt="" width="800" height="520"></span>
+            <span class="j-body"><span class="j-no">05 · Gewerk</span><span class="j-name">Pflege &amp; Betreuung</span><span class="j-sub">Pflegehilfskräfte, Pflegefachkräfte mit Anerkennung</span><span class="j-more">Anforderungen ansehen →</span></span>
+          </button>
         </div>
-        <div class="countries" style="grid-template-columns:1fr;max-width:760px">
-          <div class="country-group">
-            <h3>Ohne Visum, ohne Arbeitserlaubnis</h3>
-            <p>EU-Bürgerinnen und -Bürger dürfen in Deutschland ohne besondere Genehmigung arbeiten. Dadurch ist ein Start oft schon nach wenigen Wochen möglich.</p>
-          </div>
+        <div class="j-panel j-right" data-a="0.41" data-b="0.51">
+          <button type="button" class="j-card" data-gewerk="gastro">
+            <span class="j-img"><img src="assets/img/branchen/gastro.webp" alt="" width="800" height="520"></span>
+            <span class="j-body"><span class="j-no">06 · Gewerk</span><span class="j-name">Gastronomie &amp; Hotel</span><span class="j-sub">Köche, Küchenhilfen, Housekeeping, Service</span><span class="j-more">Anforderungen ansehen →</span></span>
+          </button>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= ÜBER UNS ================= -->
-    <section class="section section-white" id="ueber-uns">
-      <div class="container grid-2">
-        <div>
-          <div class="kicker">Über uns</div>
-          <h2 style="font-size:clamp(1.7rem,3.2vw,2.4rem);margin:0 0 16px">Wir kennen beide Seiten.</h2>
-          <p style="color:var(--muted-dark);font-size:1.07rem;margin:0">
-            <span data-cfg="companyName">Terravia</span> ist aus der Praxis entstanden. Wir haben bereits mehrere Unternehmen in Deutschland erfolgreich mit Arbeitskräften aus dem europäischen Ausland versorgt – und wissen, worauf es ankommt: die richtigen Leute, vollständige Unterlagen und ein pünktlicher Start.
-          </p>
-          <ul class="about-points">
-            <li><span class="check">✓</span><span>Erfahrung aus erfolgreichen Vermittlungen in verschiedenen Branchen</span></li>
-            <li><span class="check">✓</span><span>Verlässliches Netzwerk aus Partneragenturen im EU-Ausland</span></li>
-            <li><span class="check">✓</span><span>Verständnis für die Erwartungen von Bewerbern und Arbeitgebern</span></li>
-            <li><span class="check">✓</span><span>Ein fester Ansprechpartner für Ihr Unternehmen</span></li>
-          </ul>
+        <div class="j-panel j-left" data-a="0.478" data-b="0.578">
+          <button type="button" class="j-card" data-gewerk="landwirtschaft">
+            <span class="j-img"><img src="assets/img/branchen/landwirtschaft.webp" alt="" width="800" height="520"></span>
+            <span class="j-body"><span class="j-no">07 · Gewerk</span><span class="j-name">Landwirtschaft</span><span class="j-sub">Erntehelfer, Saisonkräfte, Tierpflege</span><span class="j-more">Anforderungen ansehen →</span></span>
+          </button>
         </div>
-        <div class="about-panel">
-          <blockquote>„Gute Vermittlung heißt für uns: Die Mitarbeitenden bleiben – weil es für beide Seiten passt.“</blockquote>
-          <div class="sig">— Ihr <span data-cfg="companyName">Terravia</span>-Team</div>
-          <div class="facts">
-            <div><span>Herkunft</span><span>EU-Ausland</span></div>
-            <div><span>Modelle</span><span>Direktanstellung oder Überlassung</span></div>
-            <div><span>Referenzen</span><span>gern auf Anfrage</span></div>
-          </div>
+        <div class="j-panel j-right" data-a="0.546" data-b="0.646">
+          <button type="button" class="j-card" data-gewerk="reinigung">
+            <span class="j-img"><img src="assets/img/branchen/reinigung.webp" alt="" width="800" height="520"></span>
+            <span class="j-body"><span class="j-no">08 · Gewerk</span><span class="j-name">Reinigung &amp; Facility</span><span class="j-sub">Gebäudereinigung, Hausmeisterdienste</span><span class="j-more">Anforderungen ansehen →</span></span>
+          </button>
+        </div>
+        <div class="j-panel j-left j-text" id="ueberlassung" data-a="0.63" data-b="0.73">
+          <span class="j-no">Arbeitnehmerüberlassung</span>
+          <h2>Was ist das?</h2>
+          <p>Die Fachkraft ist bei einem zugelassenen Personaldienstleister angestellt und arbeitet bei Ihnen im Betrieb. Sie bestimmen die Arbeit – Arbeitgeber bleibt der Dienstleister.</p>
+        </div>
+        <div class="j-panel j-right j-text" data-a="0.702" data-b="0.802">
+          <span class="j-no">Ihr Vorteil</span>
+          <h2>Flexibel ohne eigenen Arbeitsvertrag</h2>
+          <p>Lohn, Sozialversicherung und Verwaltung übernimmt der Personaldienstleister. Sie zahlen einen vereinbarten Stundensatz – ideal für Projekte und Saisonspitzen.</p>
+        </div>
+        <div class="j-panel j-left j-text" data-a="0.774" data-b="0.874">
+          <span class="j-no">Die Regeln</span>
+          <h2>Klar geregelt im AÜG</h2>
+          <p>Überlassung nur mit Erlaubnis nach § 1 AÜG, höchstens 18 Monate beim selben Betrieb. Nach 9 Monaten gilt grundsätzlich gleicher Lohn wie für Ihre Stammbelegschaft.</p>
+        </div>
+        <div class="j-panel j-right j-text" data-a="0.846" data-b="0.946">
+          <span class="j-no">Unsere Partner</span>
+          <h2>Nur zugelassene Personaldienstleister</h2>
+          <p>Wir selbst überlassen keine Arbeitnehmer. Die Überlassung erfolgt ausschließlich über Partner mit gültiger Erlaubnis.</p>
+        </div>
+        <div class="j-panel j-left j-text" data-a="0.918" data-b="1.0" data-hold="1">
+          <span class="j-no">Wichtig</span>
+          <h2>Nicht im Bauhauptgewerbe</h2>
+          <p>Im Bauhauptgewerbe ist Überlassung verboten. Dort vermitteln wir in die Direktanstellung – die Fachkraft wird direkt bei Ihnen angestellt.</p>
         </div>
       </div>
     </section>
@@ -280,6 +155,7 @@
         </div>
       </div>
     </section>
+
 
     <!-- ================= KONTAKT ================= -->
     <section class="section section-black" id="kontakt">
@@ -393,6 +269,7 @@
         </div>
       </div>
     </section>
+
     <!-- ================= RECHTLICHES ================= -->
     <section class="section legal-end" id="rechtliches">
       <div class="container">

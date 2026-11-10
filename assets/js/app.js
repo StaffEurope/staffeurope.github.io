@@ -830,6 +830,106 @@ function initShowcase() {
   items.forEach((el) => io.observe(el));
 }
 
+/* ---------- Reise durch die Berge ---------- */
+
+function initJourney() {
+  const sec = document.querySelector(".journey");
+  if (!sec) return;
+  const v = sec.querySelector(".journey-video");
+  const bar = sec.querySelector(".journey-bar");
+  const panels = [...sec.querySelectorAll(".j-panel")].map((el) => ({
+    el, a: Number(el.dataset.a), b: Number(el.dataset.b), hold: el.dataset.hold === "1",
+    side: el.classList.contains("j-left") ? -1 : el.classList.contains("j-right") ? 1 : 0,
+    img: el.querySelector(".j-img img"),
+  }));
+  const still = calm();
+  const ease = (x) => 1 - Math.pow(1 - x, 3);
+  const clamp = (x) => Math.max(0, Math.min(1, x));
+
+  // passende Videofassung: quer für Computer, hoch für Handy
+  let mode = null;
+  const pick = () => {
+    const m = innerHeight > innerWidth ? "hoch" : "quer";
+    if (m === mode) return;
+    mode = m;
+    v.poster = m === "hoch" ? v.dataset.posterHoch : "assets/video/reise-quer.jpg";
+    v.src = v.dataset[m];
+    v.load();
+  };
+  pick();
+
+  const progress = () => {
+    const top = sec.getBoundingClientRect().top;
+    const span = sec.offsetHeight - innerHeight;
+    return span > 0 ? clamp(-top / span) : 0;
+  };
+
+  function layout(p) {
+    bar.style.transform = `scaleX(${p})`;
+    const mobile = innerWidth < 760;
+    panels.forEach((q) => {
+      let t = (p - q.a) / (q.b - q.a);
+      if (q.hold && q.a === 0 && t < 0.5) t = Math.max(t, 0.3); // Titel ist von Anfang an da
+      if (q.hold && q.b >= 0.99 && t > 0.5) t = Math.min(t, 0.6); // letzte Tafel bleibt stehen
+      const visible = t > 0 && t < 1;
+      q.el.style.visibility = visible ? "visible" : "hidden";
+      if (!visible) { q.el.style.opacity = 0; return; }
+      const e = ease(clamp(t / 0.3));          // hereinschweben
+      const x = clamp((t - 0.7) / 0.3);         // nach hinten wegschweben
+      const s = q.side;
+      const far = mobile ? 70 : 55;
+      let tf, op;
+      if (still) {
+        tf = "translateY(-50%)";
+        op = Math.min(e, 1 - x);
+      } else {
+        const inv = 1 - e;
+        tf = `translateY(-50%) ${s === 0 ? "translateX(-50%)" : ""}` +
+          ` translate3d(${(s * inv * far + -s * x * 8).toFixed(2)}vw, ${(x * -4).toFixed(2)}vh, ${(-inv * 520 - x * 700).toFixed(0)}px)` +
+          ` rotateY(${(-s * inv * 65 + s * x * 22).toFixed(1)}deg) scale(${(1 - x * 0.18).toFixed(3)})`;
+        op = Math.min(e, 1 - x * 0.95);
+      }
+      if (s === 0 && still) tf += " translateX(-50%)";
+      q.el.style.transform = tf;
+      q.el.style.opacity = op.toFixed(3);
+      q.el.style.pointerEvents = op > 0.6 ? "auto" : "none";
+      if (q.img && !still) q.img.style.setProperty("--iz", (1.18 - 0.14 * e + 0.08 * x).toFixed(3));
+    });
+  }
+
+  let current = 0, running = false;
+  const tick = () => {
+    const p = progress();
+    layout(p);
+    const d = v.duration;
+    if (d && !isNaN(d) && !still) {
+      const target = p * (d - 0.05);
+      current += (target - current) * 0.2;
+      if (Math.abs(target - current) < 0.004) current = target;
+      if (Math.abs(v.currentTime - current) > 0.01) v.currentTime = current;
+      if (current !== target) { requestAnimationFrame(tick); return; }
+    }
+    running = false;
+  };
+  const kick = () => { if (!running) { running = true; requestAnimationFrame(tick); } };
+  addEventListener("scroll", kick, { passive: true });
+  addEventListener("resize", () => { pick(); kick(); });
+  v.addEventListener("loadedmetadata", kick);
+  const unlock = () => {
+    v.play().then(() => { v.pause(); kick(); }).catch(() => {});
+    removeEventListener("touchstart", unlock);
+  };
+  addEventListener("touchstart", unlock, { passive: true });
+  kick();
+
+  // Menüpunkte springen an die passende Stelle der Reise
+  document.querySelectorAll("[data-jump]").forEach((a) => a.addEventListener("click", (e) => {
+    e.preventDefault();
+    const y = sec.offsetTop + Number(a.dataset.jump) * (sec.offsetHeight - innerHeight);
+    scrollTo({ top: y, behavior: still ? "auto" : "smooth" });
+  }));
+}
+
 /* ---------- Start ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -849,4 +949,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initGewerke();
   initScrollVideo();
   initShowcase();
+  initJourney();
 });
